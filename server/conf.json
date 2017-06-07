@@ -1,5 +1,5 @@
 {
-	"maxplayers" : 100,
+	"maxplayers" : 1024,
 	"name" : "Lost World RolePlay [DEV]",
 	"streamdistance": 500.0,
 	"announce": false
