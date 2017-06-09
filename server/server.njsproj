@@ -17,6 +17,12 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Compile Include="packages\lw\events.js" />
+    <Compile Include="packages\lw\events\commands.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="packages\lw\events\weapons.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="packages\lw\events\world.js">
       <SubType>Code</SubType>
     </Compile>
