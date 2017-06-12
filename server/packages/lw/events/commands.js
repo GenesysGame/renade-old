@@ -44,5 +44,25 @@ var registered = {
         var hash = supportedWeapons[modelName];
         if (hash == null) { return; }
         player.giveWeapon(hash, 1000);
+    },
+
+    "cl": (player, args) => {
+        var component = parseInt(args[0]);
+        if (component == null || isNaN(component)) {
+            component = 0;
+        }
+        var id = parseInt(args[1]);
+        if (id == null || isNaN(id)) {
+            id = lastId + 1;
+        }
+        lastId = id;
+        var tex = parseInt(args[2]);
+        if (tex == null || isNaN(tex)) {
+            tex = 0;
+        }
+        player.setClothes(component, id, tex, 0);
+        console.log("Set " + component + " to " + id + ", tex " + tex);
     }
-};
+}
+
+var lastId = 0;
