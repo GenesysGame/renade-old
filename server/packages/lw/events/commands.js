@@ -60,9 +60,36 @@ var registered = {
         if (tex == null || isNaN(tex)) {
             tex = 0;
         }
-        player.setClothes(component, id, tex, 0);
-        console.log("Set " + component + " to " + id + ", tex " + tex);
+        var pal = parseInt(args[3]);
+        if (pal == null || isNaN(pal)) {
+            pal = 0;
+        }
+        player.setClothes(component, id, tex, pal);
+        let string = "Set " + component + " to " + id + ", texture " + tex + "palete " + pal;
+        console.log(string);
+        player.outputChatBox(string);
+    },
+
+    "pr": (player, args) => {
+        var prop = parseInt(args[0]);
+        if (prop == null || isNaN(prop)) {
+            prop = 0;
+        }
+        var id = parseInt(args[1]);
+        if (id == null || isNaN(id)) {
+            id = lastPropId + 1;
+        }
+        lastPropId = id;
+        var tex = parseInt(args[2]);
+        if (tex == null || isNaN(tex)) {
+            tex = 0;
+        }
+        player.setProp(prop, id, tex);
+        let string = "Set prop " + prop + " to " + id + ", texture " + tex;
+        console.log(string);
+        player.outputChatBox(string);
     }
 }
 
+var lastPropId = 0;
 var lastId = 0;
