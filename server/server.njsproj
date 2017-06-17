@@ -20,6 +20,9 @@
     <Compile Include="packages\lw\events\commands.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="packages\lw\events\db.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="packages\lw\events\weapons.js">
       <SubType>Code</SubType>
     </Compile>
