@@ -1,8 +1,22 @@
-﻿var commands = require("./commands");
+﻿var db = require("./db");
+var commands = require("./commands");
 
 function playerJoinHandler(player) {
     console.log(player.name + " joined the server. Total: " + mp.players.length);
 
+    player.spawn(new mp.Vector3(-269.2, 6644, 7.4));
+}
+
+function playerQuitHandler(player, exitType, reason) {
+    if (exitType != "kicked") {
+        var str = player.name + " left the server (" + exitType + "). Total: " + (mp.players.length - 1);
+    } else {
+        var str = player.name + " kicked. Reason: " + reason + ". Total: " + (mp.players.length - 1);
+    }
+    console.log(str);
+}
+
+function playerSpawned(player) {
     player.model = mp.joaat("MP_M_Freemode_01");
 
     let hairId = Math.round(Math.random() * 13);
@@ -22,17 +36,6 @@ function playerJoinHandler(player) {
     let feetId = Math.round(Math.random() * 58);
     console.log(player.name + " -> Feet: " + feetId);
     player.setClothes(6, feetId, 0, 0);
-
-    player.spawn(new mp.Vector3(-269.2, 6644, 7.4));
-}
-
-function playerQuitHandler(player, exitType, reason) {
-    if (exitType != "kicked") {
-        var str = player.name + " left the server (" + exitType + "). Total: " + (mp.players.length - 1);
-    } else {
-        var str = player.name + " kicked. Reason: " + reason + ". Total: " + (mp.players.length - 1);
-    }
-    console.log(str);
 }
 
 function commandHandler(player, comText) {
@@ -45,5 +48,6 @@ function commandHandler(player, comText) {
 mp.events.add({
     "playerJoin": playerJoinHandler,
     "playerQuit": playerQuitHandler,
+    "playerSpawn": playerSpawned,
     "playerCommand": commandHandler
 });
