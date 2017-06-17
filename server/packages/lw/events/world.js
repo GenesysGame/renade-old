@@ -17,7 +17,7 @@ function playerQuitHandler(player, exitType, reason) {
 }
 
 function playerSpawned(player) {
-    player.model = mp.joaat("MP_M_Freemode_01");
+    player.model = 1885233650;
 
     let hairId = Math.round(Math.random() * 13);
     var color = Math.round(Math.random() * 5);

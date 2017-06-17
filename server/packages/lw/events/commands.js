@@ -88,6 +88,21 @@ var registered = {
         let string = "Set prop " + prop + " to " + id + ", texture " + tex;
         console.log(string);
         player.outputChatBox(string);
+    },
+
+    "sex": (player, args) => {
+        let male = 1885233650;
+        let female = -1667301416;
+
+        var sex = parseInt(args[0]);
+        if (sex == null || isNaN(sex)) {
+            sex = 0;
+        }
+        if (sex == 0) {
+            player.model = male;
+        } else {
+            player.model = female;
+        }
     }
 }
 
