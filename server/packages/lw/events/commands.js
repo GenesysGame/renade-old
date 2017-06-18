@@ -196,7 +196,6 @@ function setPoliceClothesSet(player, set) {
             legs = [33, 0];
             foot = [25, 0];
             helmet = [6, 1];
-            mask = [46, 0];
             break;
         case 7:
             torso = [55, 0];
@@ -245,7 +244,7 @@ function setSwatClothesSet(player, set) {
             break;
         case 1:
             torso = [49, 0];
-            legs = [33, 0]; //wrong
+            legs = [34, 0];
             foot = [25, 0];
             mask = [52, 0];
             helmet = [16, 2];
