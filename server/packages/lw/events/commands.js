@@ -1,5 +1,8 @@
 ﻿var weapons = require("./weapons");
 
+let male = 1885233650;
+let female = -1667301416;
+
 var supportedWeapons = {
     "pistol": weapons.WEAPON_PISTOL,
     "smg": weapons.WEAPON_SMG,
@@ -91,9 +94,6 @@ var registered = {
     },
 
     "sex": (player, args) => {
-        let male = 1885233650;
-        let female = -1667301416;
-
         var sex = parseInt(args[0]);
         if (sex == null || isNaN(sex)) {
             sex = 0;
@@ -103,8 +103,177 @@ var registered = {
         } else {
             player.model = female;
         }
+    },
+
+    "police": (player, args) => {
+        if (player.model == male) {
+            var set = parseInt(args[0]);
+            if (set == null || isNaN(set)) {
+                set = 0;
+            }
+            setPoliceClothesSet(player, set);
+            let string = "Plice set " + set + " (male)";
+            console.log(string);
+            player.outputChatBox(string);
+        } else {
+            // TODO
+        }
+    },
+
+    "swat": (player, args) => {
+        if (player.model == male) {
+            var set = parseInt(args[0]);
+            if (set == null || isNaN(set)) {
+                set = 0;
+            }
+            setSwatClothesSet(player, set);
+            let string = "SWAT set " + set + " (male)";
+            console.log(string);
+            player.outputChatBox(string);
+        } else {
+            // TODO
+        }
     }
 }
 
 var lastPropId = 0;
 var lastId = 0;
+
+function setPoliceClothesSet(player, set) {
+    var torso = [0, 0];
+    var torsoAcc = [15, 0];
+    var legs = [0, 0];
+    var foot = [0, 0];
+    var helmet = [0, 0];
+    var hands = [0, 0];
+    var mask = [0, 0];
+
+    switch (set) {
+        case 0:
+            torso = [55, 0];
+            torsoAcc = [58, 0];
+            legs = [33, 0];
+            foot = [25, 0];
+            hands = [52, 0];
+            break;
+        case 1:
+            torso = [13, 2];
+            torsoAcc = [58, 0];
+            legs = [33, 0];
+            foot = [25, 0];
+            hands = [11, 0];
+            break;
+        case 2:
+            torso = [55, 0];
+            torsoAcc = [58, 0];
+            legs = [35, 0];
+            foot = [21, 0];
+            break;
+        case 3:
+            torso = [26, 0];
+            torsoAcc = [58, 0];
+            legs = [35, 0];
+            foot = [21, 0];
+            hands = [11, 0];
+            break;
+        case 4:
+            torso = [13, 0];
+            torsoAcc = [58, 0];
+            legs = [3, 0];
+            foot = [21, 0];
+            hands = [11, 0];
+            break;
+        case 5:
+            torso = [26, 2];
+            torsoAcc = [58, 0];
+            legs = [3, 10];
+            foot = [21, 0];
+            hands = [11, 0];
+            break;
+        case 6:
+            torso = [55, 0];
+            torsoAcc = [58, 0];
+            legs = [33, 0];
+            foot = [25, 0];
+            helmet = [6, 1];
+            mask = [46, 0];
+            break;
+        case 7:
+            torso = [55, 0];
+            torsoAcc = [15, 0];
+            legs = [33, 0];
+            foot = [25, 0];
+            helmet = [15, 2];
+            mask = [46, 0];
+            break;
+        case 8:
+            torso = [50, 0];
+            torsoAcc = [58, 0];
+            legs = [33, 0];
+            foot = [25, 0];
+            hands = [1, 0];
+            break;
+        case 9:
+            torso = [111, 3];
+            torsoAcc = [58, 0];
+            legs = [33, 0];
+            foot = [25, 0];
+            hands = [4, 0];
+            break;
+        default: break;
+    }
+
+    setClothes(player, torso, torsoAcc, legs, foot, hands, helmet, mask);
+}
+
+function setSwatClothesSet(player, set) {
+    var torso = [0, 0];
+    var torsoAcc = [15, 0];
+    var legs = [0, 0];
+    var foot = [0, 0];
+    var helmet = [0, 0];
+    var hands = [4, 0];
+    var mask = [0, 0];
+
+    switch (set) {
+        case 0:
+            torso = [49, 0];
+            torsoAcc = [56, 1];
+            legs = [33, 0];
+            foot = [25, 0];
+            mask = [52, 0];
+            break;
+        case 1:
+            torso = [49, 0];
+            legs = [33, 0]; //wrong
+            foot = [25, 0];
+            mask = [52, 0];
+            helmet = [16, 2];
+            break;
+        case 2:
+            torso = [53, 0];
+            torsoAcc = [58, 0];
+            legs = [33, 0];
+            foot = [25, 0];
+            break;
+        case 3:
+            torso = [49, 0];
+            legs = [33, 0];
+            foot = [25, 0];
+            mask = [52, 0];
+            break;
+        default: break;
+    }
+
+    setClothes(player, torso, torsoAcc, legs, foot, hands, helmet, mask);
+}
+
+function setClothes(player, torso, torsoAcc, legs, foot, hands, helmet, mask) {
+    player.setClothes(11, torso[0], torso[1], 0);
+    player.setClothes(4, legs[0], legs[1], 0);
+    player.setClothes(6, foot[0], foot[1], 0);
+    player.setClothes(8, torsoAcc[0], torsoAcc[1], 0);
+    player.setClothes(3, hands[0], hands[1], 0);
+    player.setClothes(9, helmet[0], helmet[1], 0);
+    player.setClothes(1, mask[0], mask[1], 0);
+}
