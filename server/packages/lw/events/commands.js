@@ -49,6 +49,17 @@ var registered = {
         player.giveWeapon(hash, 1000);
     },
 
+    "spawn": (player, args) => {
+        player.spawn(new mp.Vector3(-269.2, 6644, 7.4));
+    },
+
+    "clean": (player, args) => {
+        let vehicle = getClosestVehicle(player, 10);
+        if (vehicle != null) {
+            vehicle.destroy();
+        }
+    },
+
     "cl": (player, args) => {
         var component = parseInt(args[0]);
         if (component == null || isNaN(component)) {
@@ -87,8 +98,7 @@ var registered = {
         if (tex == null || isNaN(tex)) {
             tex = 0;
         }
-        player.setProp(prop, id, tex);
-        let string = "Set prop " + prop + " to " + id + ", texture " + tex;
+        let string = setProperty(player, prop, id, tex);
         console.log(string);
         player.outputChatBox(string);
     },
@@ -112,7 +122,7 @@ var registered = {
                 set = 0;
             }
             setPoliceClothesSet(player, set);
-            let string = "Plice set " + set + " (male)";
+            let string = "Police set " + set + " (male)";
             console.log(string);
             player.outputChatBox(string);
         } else {
@@ -275,4 +285,37 @@ function setClothes(player, torso, torsoAcc, legs, foot, hands, helmet, mask) {
     player.setClothes(3, hands[0], hands[1], 0);
     player.setClothes(9, helmet[0], helmet[1], 0);
     player.setClothes(1, mask[0], mask[1], 0);
+}
+
+function setProperty(player, property, drawable, texture) {
+    let SET_PED_PROP_INDEX = '0xA89A57E40879561F';
+    if (property < 0 || property > 2) {
+        return "Properties: 0 - hats, 1 - glasses, 2 - ears";
+    }
+    player.invoke(SET_PED_PROP_INDEX, player, property, drawable, texture, true);
+    return "Set property " + property + " to " + drawable + " drawable with texture " + texture;
+}
+
+function getClosestVehicle(player, maxDistance) {
+    let vehicles = mp.vehicles.toArray();
+    var minDist = null;
+    var minDistVehicle = null;
+    var max = maxDistance;
+    if (max == null || isNaN(max)) {
+        max = Number.POSITIVE_INFINITY;
+    }
+
+    for (var i = 0; i < vehicles.length; i++) {
+        let aPos = player.position;
+        let bPos = vehicles[i].position;
+
+        //AB = √(xb - xa)2 + (yb - ya)2 + (zb - za)2
+        let dist = Math.sqrt(Math.pow(bPos.x - aPos.x, 2) + Math.pow(bPos.y - aPos.y, 2) + Math.pow(bPos.z - aPos.z, 2));
+        if (dist <= max && (minDist == null || minDist > dist)) {
+            minDist = dist;
+            minDistVehicle = vehicles[i];
+        }
+    }
+
+    return minDistVehicle;
 }
