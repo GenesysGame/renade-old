@@ -11,6 +11,22 @@ var supportedWeapons = {
     "shotgun": weapons.WEAPON_ASSAULTSHOTGUN
 };
 
+var weathers = [
+    'CLEAR',
+    'EXTRASUNNY',
+    'CLOUDS',
+    'OVERCAST',
+    'RAIN',
+    'CLEARING',
+    'THUNDER',
+    'SMOG',
+    'FOGGY',
+    'XMAS',
+    'SNOWLIGHT',
+    'BLIZZARD',
+    'HALLOWEEN'
+];
+
 module.exports = {
 
     handle: function (player, command, args) {
@@ -29,6 +45,19 @@ var registered = {
         var y = Math.round(pos.y * 1000) / 1000;
         var z = Math.round(pos.z * 1000) / 1000;
         player.outputChatBox("Your position ->  X: " + x + ", Y: " + y + ", Z: " + z);
+    },
+
+    "weather": (player, args) => {
+        var id = parseInt(args[0]);
+        if (id == null || isNaN(id)) {
+            id = 0;
+        }
+        if (id >= 0 && id < weathers.length) {
+            player.outputChatBox("Selected weather: " + weathers[id]);
+            mp.environment.weather = weathers[id];
+        } else {
+            player.outputChatBox("Wheater Id should be 0.." + (weathers.length - 1));
+        }
     },
 
     "veh": (player, args) => {
