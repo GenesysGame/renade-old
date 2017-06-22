@@ -1,4 +1,6 @@
 ﻿var weapons = require("./weapons");
+var ipls = require("./ipls");
+var authorization = require("./authorization");
 
 let male = 1885233650;
 let female = -1667301416;
@@ -33,6 +35,11 @@ module.exports = {
         var handler = registered[command];
         if (handler != null) {
             handler(player, args);
+        } else {
+            handler = authorization.commands[command];
+            if (handler != null) {
+                handler(player, args);
+            }
         }
     }
 
@@ -70,6 +77,11 @@ var registered = {
         mp.vehicles.new(hash, pos);
     },
 
+
+    "repair": (player, args) => {
+        player.vehicle.repair();
+    },
+
     "weapon": (player, args) => {
         var modelName = args[0];
         if (modelName == null) { return; }
@@ -88,6 +100,41 @@ var registered = {
             vehicle.destroy();
         }
     },
+
+    "ipl": (player, args) => {
+        var index = parseInt(args[0]);
+        if (index == null || isNaN(index)) {
+            index = lastIpl + 1;
+        }
+        lastIpl = index;
+        let ipl = ipls.list[index];
+
+        requestIpl(ipl);
+
+        let string = "IPL " + index + " - " + ipl;
+        player.outputChatBox(string);
+        console.log(string);
+    },
+
+    "iplu": (player, args) => {
+        var index = parseInt(args[0]);
+        if (index == null || isNaN(index)) {
+            index = lastIpl + 1;
+        }
+        lastIpl = index;
+        let ipl = ipls.list[index];
+        removeIpl(ipl);
+
+        let string = "IPL removed " + index + " - " + ipl;
+        player.outputChatBox(string);
+        console.log(string);
+    },
+
+    "ipllist": (player, args) => {
+        getAcitveIpls(player);
+    },
+
+    // clothes
 
     "cl": (player, args) => {
         var component = parseInt(args[0]);
@@ -177,6 +224,7 @@ var registered = {
 
 var lastPropId = 0;
 var lastId = 0;
+var lastIpl = 0;
 
 function setPoliceClothesSet(player, set) {
     var torso = [0, 0];
@@ -347,4 +395,38 @@ function getClosestVehicle(player, maxDistance) {
     }
 
     return minDistVehicle;
+}
+
+function getAcitveIpls(player) {
+    let IS_IPL_ACTIVE = '0xC5C451876961F4BA';
+    player.outputChatBox("ACTIVE IPLS: ");
+    for (var i = 0; i < ipls.list.length; i++) {
+        let iplName = ipls.list[i];
+        let isActive = player.invoke(IS_IPL_ACTIVE, iplName);
+        if (isActive) {
+            let string = "Active: " + i + " - " + iplName;
+            player.outputChatBox(string);
+            console.log(player.name + ": " + string);
+        }
+    }
+}
+
+function requestIpl(iplName) {
+    let REQUEST_IPL = '0x32EAD4829CDBABEF';
+
+    mp.players.forEach(
+        (player, id) => {
+            player.invoke(REQUEST_IPL, iplName);
+        }
+    );
+}
+
+function removeIpl(iplName) {
+    let REMOVE_IPL = '0x6FE7B9647FC3C004';
+
+    mp.players.forEach(
+        (player, id) => {
+            player.invoke(REMOVE_IPL, iplName);
+        }
+    );
 }
