@@ -7,8 +7,8 @@
         "bh1_47_joshhse_firevfx",
         "BH1_47_JoshHse_UnBurnt",
         "BH1_48_Killed_Michael",
-        "bnkheist_apt_dest",
-        "bnkheist_apt_norm",
+        "bnkheist_apt_dest", // destroyed paleto bay hotel
+        "bnkheist_apt_norm", // paleto bay hotel
         "burgershot_yoga",     //-813.3f, 177.5f, 75.76f
         "burnt_switch_off",
         "cargoship",     //-162.8918f, -2365.769f, 0f        - None sunken state: cargoship ( Merryweather heist ) "sunkcargoship"
