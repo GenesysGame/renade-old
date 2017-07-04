@@ -174,7 +174,8 @@ var registered = {
         if (tex == null || isNaN(tex)) {
             tex = 0;
         }
-        let string = setProperty(player, prop, id, tex);
+        player.setProp(prop, id, tex);
+        let string = "Set property " + prop + " to " + id + " drawable with texture " + tex;
         console.log(string);
         player.outputChatBox(string);
     },
@@ -362,15 +363,6 @@ function setClothes(player, torso, torsoAcc, legs, foot, hands, helmet, mask) {
     player.setClothes(3, hands[0], hands[1], 0);
     player.setClothes(9, helmet[0], helmet[1], 0);
     player.setClothes(1, mask[0], mask[1], 0);
-}
-
-function setProperty(player, property, drawable, texture) {
-    let SET_PED_PROP_INDEX = '0xA89A57E40879561F';
-    if (property < 0 || property > 2) {
-        return "Properties: 0 - hats, 1 - glasses, 2 - ears";
-    }
-    player.invoke(SET_PED_PROP_INDEX, player, property, drawable, texture, true);
-    return "Set property " + property + " to " + drawable + " drawable with texture " + texture;
 }
 
 function getClosestVehicle(player, maxDistance) {
