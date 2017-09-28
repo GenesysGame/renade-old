@@ -220,6 +220,10 @@ var registered = {
         } else {
             // TODO
         }
+    },
+
+    "createPed": (player, args) => {
+        player.call('player:createPed');
     }
 }
 

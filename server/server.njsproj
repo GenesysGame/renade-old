@@ -16,11 +16,17 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="client_packages\index.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="packages\lw\events.js" />
     <Compile Include="packages\lw\events\commands.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="packages\lw\events\db.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="client_packages\peds.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="packages\lw\events\weapons.js">
@@ -34,6 +40,7 @@
     <Content Include="conf.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="client_packages\" />
     <Folder Include="maps" />
     <Folder Include="packages" />
     <Folder Include="packages\lw\" />
