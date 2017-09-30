@@ -224,6 +224,29 @@ var registered = {
 
     "createPed": (player, args) => {
         player.call('player:createPed');
+    },
+
+    "animation": (player, args) => {
+        // player.playAnimation('mp_arresting', 'idle', 1, 49)
+        let dist = args[0];
+        if (dist == "stop") {
+            player.stopAnimation();
+        } else {
+            let anim = args[1];
+            let speed = parseInt(args[2]);
+            if (speed == null || isNaN(speed)) {
+                speed = 1;
+            }
+            let flag = parseInt(args[3]);
+            if (flag == null || isNaN(flag)) {
+                flag = 49;
+            }
+            player.playAnimation(dist, anim, speed, flag);
+
+            let string = "Animation " + dist + " " + anim;
+            console.log(string);
+            player.outputChatBox(string);
+        }
     }
 }
 

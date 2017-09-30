@@ -2,4 +2,4 @@
 
 global.dimensions = {};
 
-const events = require('./events');
+const events = require('./scripts');

@@ -19,32 +19,31 @@
     <Compile Include="client_packages\index.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="packages\lw\events.js" />
-    <Compile Include="packages\lw\events\commands.js">
+    <Compile Include="packages\events.js" />
+    <Compile Include="packages\events\commands.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="packages\lw\events\db.js">
+    <Compile Include="packages\events\db.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="client_packages\peds.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="packages\lw\events\weapons.js">
+    <Compile Include="packages\events\weapons.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="packages\lw\events\world.js">
+    <Compile Include="packages\events\world.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="packages\lw\hashes.js" />
-    <Compile Include="packages\lw\index.js" />
+    <Compile Include="packages\hashes.js" />
+    <Compile Include="packages\index.js" />
     <Content Include="conf.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="client_packages\" />
     <Folder Include="maps" />
     <Folder Include="packages" />
-    <Folder Include="packages\lw\" />
-    <Folder Include="packages\lw\events\" />
+    <Folder Include="packages\events\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
