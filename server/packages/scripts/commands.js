@@ -1,6 +1,7 @@
 ﻿var weapons = require("./weapons");
 var ipls = require("./ipls");
 var authorization = require("./authorization");
+let events = require('./events');
 
 let male = 1885233650;
 let female = -1667301416;

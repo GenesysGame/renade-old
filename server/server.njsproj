@@ -19,31 +19,53 @@
     <Compile Include="client_packages\index.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="packages\events.js" />
-    <Compile Include="packages\events\commands.js">
+    <Compile Include="client_packages\keyboard.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="packages\events\db.js">
+    <Compile Include="client_packages\web\animlist\animlist.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="client_packages\readme.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="client_packages\peds.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="packages\events\weapons.js">
+    <Compile Include="client_packages\web\animlist\index.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="packages\events\world.js">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="client_packages\web\sources\js\jquery-3.2.1.min.js" />
     <Compile Include="packages\hashes.js" />
     <Compile Include="packages\index.js" />
+    <Compile Include="packages\scripts.js" />
+    <Compile Include="packages\scripts\authorization.js" />
+    <Compile Include="packages\scripts\commands.js" />
+    <Compile Include="packages\scripts\db.js" />
+    <Compile Include="packages\scripts\events.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="packages\scripts\ipls.js" />
+    <Compile Include="packages\scripts\weapons.js" />
+    <Compile Include="packages\scripts\world.js" />
+    <Content Include="client_packages\web\animlist\index.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="client_packages\web\sources\css\animlist.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="conf.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="client_packages\" />
+    <Folder Include="client_packages\web\animlist\" />
+    <Folder Include="client_packages\web\" />
+    <Folder Include="client_packages\web\sources\" />
+    <Folder Include="client_packages\web\sources\css\" />
+    <Folder Include="client_packages\web\sources\img\" />
+    <Folder Include="client_packages\web\sources\js\" />
     <Folder Include="maps" />
     <Folder Include="packages" />
-    <Folder Include="packages\events\" />
+    <Folder Include="packages\scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
