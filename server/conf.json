@@ -1,11 +1,8 @@
 {
-  {
-    "name": "Rize RolePlay [DEV]",
-    "gamemode": "roleplay",
-    "announce": false,
-    "bind": "188.120.235.38",
-    "port": 22005,
-    "maxplayers": 1024,
-    "streamdistance": 500.0
-  }
+  "name": "Rize RolePlay [DEV]",
+  "gamemode": "roleplay",
+  "announce": false,
+  "port": 22005,
+  "maxplayers": 1024,
+  "streamdistance": 500.0
 }

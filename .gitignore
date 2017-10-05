@@ -1,3 +1,4 @@
 *.exe
 *.dll
 server/obj/*
+server/client_packages/.listcache
