@@ -1,6 +1,11 @@
 {
-	"maxplayers" : 1024,
-	"name" : "Lost World RolePlay [DEV]",
-	"streamdistance": 500.0,
-	"announce": false
+  {
+    "name": "Rize RolePlay [DEV]",
+    "gamemode": "roleplay",
+    "announce": false,
+    "bind": "188.120.235.38",
+    "port": 22005,
+    "maxplayers": 1024,
+    "streamdistance": 500.0
+  }
 }
