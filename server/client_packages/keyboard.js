@@ -4,11 +4,18 @@
 // or gamepad should be connected with this file.
 
 exports.bindWindow = bindWindow;
+exports.bindAction = bindAction;
 
 function bindWindow(window) {
     mp.keys.bind(window.key, true, function () {
         let visible = !window.browser.active;
         window.browser.active = visible;
         mp.gui.cursor.visible = visible;
+    });
+}
+
+function bindAction(action) {
+    mp.keys.bind(action.key, true, function () {
+        action.run();
     });
 }

@@ -34,7 +34,16 @@
     <Compile Include="client_packages\web\animlist\index.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="client_packages\web\camtool\camtool.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="client_packages\web\sources\js\jquery-3.2.1.min.js" />
+    <Compile Include="client_packages\web\testcam\index.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="client_packages\web\testcam\testcam.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="packages\hashes.js" />
     <Compile Include="packages\index.js" />
     <Compile Include="packages\scripts.js" />
@@ -59,6 +68,8 @@
     <Folder Include="client_packages\" />
     <Folder Include="client_packages\web\animlist\" />
     <Folder Include="client_packages\web\" />
+    <Folder Include="client_packages\web\camtool\" />
+    <Folder Include="client_packages\web\testcam\" />
     <Folder Include="client_packages\web\sources\" />
     <Folder Include="client_packages\web\sources\css\" />
     <Folder Include="client_packages\web\sources\img\" />
