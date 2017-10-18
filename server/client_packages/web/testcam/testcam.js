@@ -4,7 +4,6 @@
 let interpolatecam = null;
 
 function lerp(vector1, vector2, deltaTime) {
-
     return new mp.Vector3(
         vector1.x + (vector2.x - vector1.x) * deltaTime,
         vector1.y + (vector2.y - vector1.y) * deltaTime,

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="../sources/js/jquery-3.2.1.min.js"></script>
+	<script src="index.js"></script>
+    <link rel="stylesheet" type="text/css" href="../sources/css/camtool.css" />
+</head>
+<body>
+	<div id="main">
+		<h1 style="text-align: center;">Camera Tool</h1>
+		<p>Linear</p>
+		<div id="Linear">
+			<div id="startpoint">
+				<p>Start point:</p>
+				<label for="startx">X</label>
+				<input type="text" id="startx">
+				<label for="starty">Y</label>
+				<input type="text" id="starty">
+				<label for="startz">Z</label>
+				<input type="text" id="startz">
+				<button>PICK</button>
+			</div>
+			<div id="endpoint">
+				<p>End point:</p>
+				<label for="endx">X</label>
+				<input type="text" id="endx">
+				<label for="endy">Y</label>
+				<input type="text" id="endy">
+				<label for="endz">Z</label>
+				<input type="text" id="endz">
+				<button>PICK</button>
+			</div>
+			<div id="direction">
+				<p>Direction:</p>
+				<label for="dirx">X</label>
+				<input type="text" id="dirx">
+				<label for="diry">Y</label>
+				<input type="text" id="diry">
+				<label for="dirz">Z</label>
+				<input type="text" id="dirz">
+				<button>PICK</button>
+			</div>
+			<div id="duration">
+				<p>Duration:</p>
+				<input type="text" id="time">
+				<label for="time">sec</label>
+				<button style="float: right; margin-right: 10px;" onclick="start()">START</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

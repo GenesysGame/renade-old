@@ -1,0 +1,10 @@
+#main{
+	width: 350px;
+	height: 375px;
+	background-color: whitesmoke;
+	float: right;
+}
+
+input{
+	width: 75px;
+}

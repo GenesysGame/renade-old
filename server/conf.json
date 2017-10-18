@@ -3,6 +3,6 @@
   "gamemode": "roleplay",
   "announce": false,
   "port": 22005,
-  "maxplayers": 1024,
+  "maxplayers": 10,
   "streamdistance": 500.0
 }
