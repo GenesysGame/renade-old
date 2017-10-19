@@ -4,17 +4,21 @@
 let list = $('.list');
 var total = 0;
 
+function load(thousand){
+
+}
+
 animations.forEach(function (v, i) {
-    if (i >= 1000) { return; }
+    if (i >= 1000 || i <= 0) { return; }
     var group = $('<optgroup></optgroup>');
     group.attr('label', v[0]);
+    group.attr('id', i);
     $.each(v, function (si) {
         if (si > 0) {
             var option = $('<option></option>');
             option.val([v[0], v[si]]);
             option.text(v[si]);
-            total = total + 1;
-
+            total += 1;
             group.append(option);
         }
     });
@@ -27,6 +31,14 @@ option.text('exit');
 list.append(option);
 
 $('.total').html(total + ' animations');
+
+var last = 1;
+
+$('.list').scroll(function(){
+    if($('#1999').offset().top < 500){
+        console.log($('#1999').offset().top);
+    }
+});
 
 list.on('change', function (e) {
     let optionSelected = $("option:selected", this);
