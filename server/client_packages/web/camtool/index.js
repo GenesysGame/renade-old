@@ -1,6 +1,12 @@
+// Renade RP. GGame Studio. 20.10.2017
+// Camera tool client package
+
 function start() {
-    // вот это плохой код, и из-за него по сути у тебя дальше ничего не получилось, потому что:
-    // 1) очень длинная строка (предлагаю тебе создат ьвыше переменные, а здесь просто заюзать их)
-    // 2) cordsselected - некорректное название, потому что ивент в данном случае - нажатие кнопки старт (я бы назвал 'camtool:startLinearCamera', потому что будут еще ддругие камеры. и к ним тоже нужны будут ивенты)
-    mp.trigger('camtool:cordsselected', $('#startx').val(), $('#starty').val(), $('#startz').val(), $('#endx').val(), $('#endy').val(), $('#endz').val());
+	var startx = parseFloat($('#startx').val());
+	var starty = parseFloat($('#starty').val());
+	var startz = parseFloat($('#startz').val());
+	var endx = parseFloat($('#endx').val());
+	var endy = parseFloat($('#endy').val());
+	var endz = parseFloat($('#endz').val());
+    mp.trigger('camtool:startLinearCamera', startx, starty, startz, endx, endy, endz);
 }
