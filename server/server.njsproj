@@ -37,6 +37,7 @@
     <Compile Include="client_packages\web\camtool\camtool.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="client_packages\web\camtool\index.js" />
     <Compile Include="client_packages\web\sources\js\jquery-3.2.1.min.js" />
     <Compile Include="client_packages\web\testcam\index.js">
       <SubType>Code</SubType>
@@ -59,6 +60,7 @@
     <Content Include="client_packages\web\animlist\index.html">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="client_packages\web\camtool\index.html" />
     <Content Include="client_packages\web\sources\css\animlist.css">
       <SubType>Code</SubType>
     </Content>
