@@ -2,12 +2,12 @@
 // Camera tool client package
 
 let keyboard = require('keyboard.js');
-let freecam = require('web/camtool/freecam.js');
+let freecam = require('camtool/freecam.js');
 
 freecam.init()
 
 let camtoolWindow = {
-    browser: mp.browsers.new('package://web/camtool/index.html'),
+    browser: mp.browsers.new('package://camtool/web/index.html'),
     key: 69 // e
 }
 
