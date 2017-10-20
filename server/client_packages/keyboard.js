@@ -6,8 +6,9 @@
 exports.bindWindow = bindWindow;
 exports.bindAction = bindAction;
 
-function bindWindow(window) {
+function bindWindow(window, condition) {
     mp.keys.bind(window.key, true, function () {
+        if (condition && !condition()) return;
         let visible = !window.browser.active;
         window.browser.active = visible;
         mp.gui.cursor.visible = visible;
