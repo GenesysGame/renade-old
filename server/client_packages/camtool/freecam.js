@@ -23,6 +23,7 @@ function init() {
         flying: false, df: 0.5, dl: 0.5, dh: 0.5, f: 0.5, l: 0.5, h: 0.5,
         maxSpeed: 2.0
     };
+    global.canExitFreecam = true;
     global.gameplayCam = mp.cameras.new("gameplay");
 
     mp.events.add("render", () => {
@@ -30,7 +31,7 @@ function init() {
         let fly = global.fly;
         const direction = global.gameplayCam.getDirection();
 
-        if (controls.isControlJustPressed(0, controlsIds.F5)) {
+        if (controls.isControlJustPressed(0, controlsIds.F5) && global.canExitFreecam) {
             fly.flying = !fly.flying;
 
             const player = mp.players.local;
@@ -50,8 +51,9 @@ function init() {
 
             mp.game.graphics.notify(fly.flying ? "Fly: ~g~Enabled" : "Fly: ~r~Disabled");
             if (fly.flying) {
-                mp.game.graphics.notify("~r~Fly script loaded!");
-                mp.game.graphics.notify("~r~F5~w~ - enable/disable\n~r~F5+Shift~w~ - disable without warping to ground\n~r~W/A/S/D/Shift/LCtrl/LAlt~w~ - move");
+                mp.game.graphics.notify("~g~Fly script loaded!");
+                mp.game.graphics.notify("~g~F5~w~ - enable/disable\n~g~F5+Shift~w~ - disable without warping to ground\n");
+                mp.game.graphics.notify('~g~E~w~ - script cameras');
             }
         }
         else if (fly.flying) {
