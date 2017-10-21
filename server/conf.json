@@ -1,8 +1,8 @@
 {
-  "name": "Rize RolePlay [DEV]",
+  "name": "Renade RolePlay [DEV]",
   "gamemode": "roleplay",
   "announce": false,
   "port": 22005,
-  "maxplayers": 10,
+  "maxplayers": 1024,
   "streamdistance": 500.0
 }
