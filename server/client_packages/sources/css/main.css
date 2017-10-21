@@ -1,0 +1,81 @@
+﻿@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+
+h1 {
+    color: #fff;
+    font-family: 'oswald';
+    font-weight: 300;
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    margin: auto;
+}
+
+option {
+    font-family: 'roboto';
+    color: #fff;
+    font-size: 13px;
+}
+
+optgroup {
+    font-family: 'roboto';
+    color: #999;
+    font-size: 13px;
+}
+
+p, label {
+    font-family: 'roboto';
+    color: #999;
+    font-size: 13px;
+    text-align: left;
+}
+
+button {
+    margin: 0px 20px 0px 20px;
+    font-family: 'roboto';
+    font-weight: bold;
+}
+
+input {
+    width: 100px;
+}
+
+/* classes */
+
+.window {
+    border: 3px solid #fff;
+    background-color: rgba(18, 33, 56, 0.9);
+    text-align: center;
+    border-radius: 20px;
+    margin: 20px 20px 0px auto;
+    padding: 0px 20px 20px 20px;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+}
+
+.list {
+    background-color: rgba(255, 255, 255, 0);
+    border-width: 0px;
+    width: inherit;
+    padding-left: 20px;
+}
+
+.tab {
+    text-align: left;
+    font-family: 'roboto';
+    color: #fff;
+    font-size: 13px;
+}
+
+button.main {
+    position: absolute;
+    right: 20px;
+}
+
+/* ids */
+
+#selected {
+    font-weight: bold;
+}

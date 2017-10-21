@@ -22,7 +22,8 @@
     <Compile Include="client_packages\keyboard.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="client_packages\web\animlist\animlist.js">
+    <Compile Include="client_packages\animlist\animations.js" />
+    <Compile Include="client_packages\animlist\animlist.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="client_packages\readme.js">
@@ -31,19 +32,17 @@
     <Compile Include="client_packages\peds.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="client_packages\web\animlist\index.js">
+    <Compile Include="client_packages\animlist\web\index.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="client_packages\web\camtool\camtool.js">
+    <Compile Include="client_packages\camtool\camtool.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="client_packages\web\sources\js\jquery-3.2.1.min.js" />
-    <Compile Include="client_packages\web\testcam\index.js">
+    <Compile Include="client_packages\camtool\freecam.js">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="client_packages\web\testcam\testcam.js">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="client_packages\camtool\web\index.js" />
+    <Compile Include="client_packages\sources\js\jquery-3.2.1.min.js" />
     <Compile Include="packages\hashes.js" />
     <Compile Include="packages\index.js" />
     <Compile Include="packages\scripts.js" />
@@ -56,24 +55,27 @@
     <Compile Include="packages\scripts\ipls.js" />
     <Compile Include="packages\scripts\weapons.js" />
     <Compile Include="packages\scripts\world.js" />
-    <Content Include="client_packages\web\animlist\index.html">
+    <Content Include="client_packages\animlist\web\index.html">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="client_packages\web\sources\css\animlist.css">
+    <Content Include="client_packages\camtool\web\index.html" />
+    <Content Include="client_packages\sources\css\main.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="client_packages\sources\css\camtool.css" />
     <Content Include="conf.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="client_packages\" />
-    <Folder Include="client_packages\web\animlist\" />
-    <Folder Include="client_packages\web\" />
-    <Folder Include="client_packages\web\camtool\" />
-    <Folder Include="client_packages\web\testcam\" />
-    <Folder Include="client_packages\web\sources\" />
-    <Folder Include="client_packages\web\sources\css\" />
-    <Folder Include="client_packages\web\sources\img\" />
-    <Folder Include="client_packages\web\sources\js\" />
+    <Folder Include="client_packages\animlist\web\" />
+    <Folder Include="client_packages\camtool\web\" />
+    <Folder Include="client_packages\guntool\" />
+    <Folder Include="client_packages\animlist\" />
+    <Folder Include="client_packages\camtool\" />
+    <Folder Include="client_packages\sources\" />
+    <Folder Include="client_packages\sources\css\" />
+    <Folder Include="client_packages\sources\img\" />
+    <Folder Include="client_packages\sources\js\" />
     <Folder Include="maps" />
     <Folder Include="packages" />
     <Folder Include="packages\scripts\" />

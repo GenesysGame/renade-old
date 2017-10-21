@@ -1,5 +1,6 @@
 *.exe
 *.dll
+*.bat
 server/obj/*
 server/client_packages/.listcache
 server/server

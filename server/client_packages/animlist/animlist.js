@@ -4,7 +4,7 @@
 let keyboard = require('keyboard.js');
 
 let testWindow = {
-    browser: mp.browsers.new('package://web/animlist/index.html'),
+    browser: mp.browsers.new('package://animlist/web/index.html'),
     key: 113 // F2
 }
 testWindow.browser.active = false;
