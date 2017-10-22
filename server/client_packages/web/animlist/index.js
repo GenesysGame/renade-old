@@ -17,7 +17,7 @@ function load(e){
         last += 500;
     } else{
         if(last > 1000){
-            $.get( "http://127.0.0.1/?min="+(last-1500)+'&max='+(last-100), function( data ) {
+            $.get( "http://127.0.0.1/?min="+(last-1500)+'&max='+(last-1000), function( data ) {
                 list.prepend(data);
                 $('.total').text('');
             });
