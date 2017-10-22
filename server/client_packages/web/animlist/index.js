@@ -7,7 +7,7 @@ var total = 0;
 function load(e){
     $('.total').text('LOADING...');
     if(e == 'forward'){
-        $.get( "http://127.0.0.1/?min="+(last+1)+'&max='+(last+500), function( data ) {
+        $.get( "http://127.0.0.1/admin/animations/get?min="+(last+1)+'&max='+(last+500), function( data ) {
             list.append(data);
             $('.total').text('');
         });
@@ -17,11 +17,11 @@ function load(e){
         last += 500;
     } else{
         if(last > 1000){
-            $.get( "http://127.0.0.1/?min="+(last-1500)+'&max='+(last-1000), function( data ) {
+            $.get( "http://127.0.0.1/admin/animations/get?min="+(last-1500)+'&max='+(last-1001), function( data ) {
                 list.prepend(data);
                 $('.total').text('');
             });
-            for (var i = last; i >= last-500; i--) {
+            for (var i = last; i > last-500; i--) {
                 $('#'+i).remove();
             }
             last -= 500;
