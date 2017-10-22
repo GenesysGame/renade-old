@@ -4,12 +4,33 @@
 let list = $('.list');
 var total = 0;
 
-function load(thousand){
-
+function load(e){
+    $('.total').text('LOADING...');
+    if(e == 'forward'){
+        $.get( "http://127.0.0.1/?min="+(last+1)+'&max='+(last+500), function( data ) {
+            list.append(data);
+            $('.total').text('');
+        });
+        for (var i = last - 501; i >= last-1000; i--) {
+            $('#'+i).remove();
+        }
+        last += 500;
+    } else{
+        if(last > 1000){
+            $.get( "http://127.0.0.1/?min="+(last-1500)+'&max='+(last-100), function( data ) {
+                list.prepend(data);
+                $('.total').text('');
+            });
+            for (var i = last; i >= last-500; i--) {
+                $('#'+i).remove();
+            }
+            last -= 500;
+        }
+    }
 }
 
 animations.forEach(function (v, i) {
-    if (i >= 1000 || i <= 0) { return; }
+    if (i >= 1001 || i <= 0) { return; }
     var group = $('<optgroup></optgroup>');
     group.attr('label', v[0]);
     group.attr('id', i);
@@ -18,25 +39,21 @@ animations.forEach(function (v, i) {
             var option = $('<option></option>');
             option.val([v[0], v[si]]);
             option.text(v[si]);
-            total += 1;
             group.append(option);
         }
     });
     list.append(group);
 });
 
-var option = $('<option></option>');
-option.val(['', '']);
-option.text('exit');
-list.append(option);
-
-$('.total').html(total + ' animations');
-
-var last = 1;
+var last = 1000;
 
 $('.list').scroll(function(){
-    if($('#1999').offset().top < 500){
-        console.log($('#1999').offset().top);
+    if($('#'+last).offset().top < 300){
+        load('forward');
+    } else{
+        if(last > 1000 && $('#'+(last-999)).offset().top > -300){
+            load('back');
+        }
     }
 });
 
