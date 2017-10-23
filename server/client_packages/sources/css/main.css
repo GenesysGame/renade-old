@@ -32,7 +32,7 @@ p, label {
 }
 
 button {
-    margin: 0px 20px 0px 20px;
+    margin: 0px 0px 0px 20px;
     font-family: 'roboto';
     font-weight: bold;
 }
@@ -89,6 +89,5 @@ input {
     }
 
 button.main {
-    position: absolute;
-    right: 20px;
+    float: right;
 }

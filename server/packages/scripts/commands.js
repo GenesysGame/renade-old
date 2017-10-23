@@ -1,18 +1,9 @@
-﻿var weapons = require("./weapons");
-var ipls = require("./ipls");
+﻿var ipls = require("./ipls");
 var authorization = require("./authorization");
 let events = require('./events');
 
 let male = 1885233650;
 let female = -1667301416;
-
-var supportedWeapons = {
-    "pistol": weapons.WEAPON_PISTOL,
-    "smg": weapons.WEAPON_SMG,
-    "rifle": weapons.WEAPON_ASSAULTRIFLE,
-    "sniper": weapons.WEAPON_SNIPERRIFLE,
-    "shotgun": weapons.WEAPON_ASSAULTSHOTGUN
-};
 
 var weathers = [
     'CLEAR',
@@ -81,14 +72,6 @@ var registered = {
 
     "repair": (player, args) => {
         player.vehicle.repair();
-    },
-
-    "weapon": (player, args) => {
-        var modelName = args[0];
-        if (modelName == null) { return; }
-        var hash = supportedWeapons[modelName];
-        if (hash == null) { return; }
-        player.giveWeapon(hash, 1000);
     },
 
     "spawn": (player, args) => {

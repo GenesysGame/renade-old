@@ -6,7 +6,7 @@
     <ProjectGuid>{e388cbe2-351a-4f22-a1c4-9c87ecd3ffda}</ProjectGuid>
     <ProjectHome />
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile />
+    <StartupFile>client_packages\guntool\weapons.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
@@ -16,6 +16,12 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="client_packages\guntool\guntool.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="client_packages\guntool\web\index.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="client_packages\index.js">
       <SubType>Code</SubType>
     </Compile>
@@ -43,6 +49,12 @@
     </Compile>
     <Compile Include="client_packages\camtool\web\index.js" />
     <Compile Include="client_packages\sources\js\jquery-3.2.1.min.js" />
+    <Compile Include="packages\admin.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="packages\admin\guntool.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="packages\hashes.js" />
     <Compile Include="packages\index.js" />
     <Compile Include="packages\scripts.js" />
@@ -53,16 +65,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="packages\scripts\ipls.js" />
-    <Compile Include="packages\scripts\weapons.js" />
+    <Compile Include="client_packages\guntool\weapons.js" />
     <Compile Include="packages\scripts\world.js" />
     <Content Include="client_packages\animlist\web\index.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="client_packages\camtool\web\index.html" />
+    <Content Include="client_packages\guntool\web\index.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="client_packages\sources\css\main.css">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="client_packages\sources\css\camtool.css" />
     <Content Include="conf.json" />
   </ItemGroup>
   <ItemGroup>
@@ -72,12 +86,14 @@
     <Folder Include="client_packages\guntool\" />
     <Folder Include="client_packages\animlist\" />
     <Folder Include="client_packages\camtool\" />
+    <Folder Include="client_packages\guntool\web\" />
     <Folder Include="client_packages\sources\" />
     <Folder Include="client_packages\sources\css\" />
     <Folder Include="client_packages\sources\img\" />
     <Folder Include="client_packages\sources\js\" />
     <Folder Include="maps" />
     <Folder Include="packages" />
+    <Folder Include="packages\admin\" />
     <Folder Include="packages\scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
