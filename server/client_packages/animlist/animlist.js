@@ -1,4 +1,4 @@
-﻿// Rize RP. GGame Studio. 1.10.2017
+﻿// Renade RP. GGame Studio. 1.10.2017
 // Animations list client package
 
 let keyboard = require('keyboard.js');

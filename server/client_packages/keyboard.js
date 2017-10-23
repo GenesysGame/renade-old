@@ -1,4 +1,4 @@
-﻿// Rize RP. GGame Studio. 1.10.2017
+﻿// Renade RP. GGame Studio. 1.10.2017
 // Keyboard controller for all client packages.
 // It means every client package which wants to use keyboard, mouse 
 // or gamepad should be connected with this file.

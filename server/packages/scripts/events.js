@@ -1,4 +1,4 @@
-﻿// Rize RP. GGame Studio. 2.10.2017
+﻿// Renade RP. GGame Studio. 2.10.2017
 // Custom events handlers. Server file
 
 let animatePlayer = (player, animName, animProperty) => {

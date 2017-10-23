@@ -1,4 +1,4 @@
-﻿// Rize RP. GGame Studio. 1.10.2017
+﻿// Renade RP. GGame Studio. 1.10.2017
 // Base client file which contains all client packages
 let peds = require('./peds.js');
 let animlist = require('./animlist/animlist.js');
