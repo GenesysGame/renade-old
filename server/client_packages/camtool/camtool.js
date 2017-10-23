@@ -37,7 +37,7 @@ mp.events.add('camtool:pickRotation', function (id) {
     camtoolWindow.browser.execute(`pickCallback('${id}', '${rot.x}', '${rot.y}', '${rot.z}');`);
 });
 
-/// enable\disable cripted camera
+// enable\disable cripted camera
 function toggle(toggle) {
     script.camera.setActive(toggle);
     mp.game.cam.renderScriptCams(toggle, false, 0, true, false);
@@ -47,7 +47,7 @@ function toggle(toggle) {
     mp.gui.cursor.visible = !toggle;
 }
 
-/// calculate an offset between start point and end point for delta time
+// calculate an offset between start point and end point for delta time
 function lerp(v1, v2, delta) {
     return new Vector3(
         v1.x + ((v2.x - v1.x) * delta),
@@ -56,9 +56,21 @@ function lerp(v1, v2, delta) {
     );
 }
 
+// calculate an angle between vectors OA and OB
+function angle(current, target) {
+    let a = {
+        x: target.x - current.x,
+        y: target.y - current.y,
+        z: target.z - current.z
+    };
+    let rotZ = (Math.atan2(a.y, a.x) * 180 / Math.PI) - 90;
+    let rotX = Math.atan2(a.z, Math.sqrt(Math.pow(a.x, 2) + Math.pow(a.y, 2))) * 180 / Math.PI;
+
+    return new Vector3(rotX, 0, rotZ);
+}
 // MARK: - Linear camera
 
-mp.events.add('camtool:startLinearCamera', function (sx, sy, sz, ex, ey, ez, rx, ry, rz, d) {
+mp.events.add('camtool:startLinearCamera', function (id, sx, sy, sz, ex, ey, ez, rx, ry, rz, d) {
     let start = new Vector3(sx, sy, sz);
     let end = new Vector3(ex, ey, ez);
     let rotation = new Vector3(rx, ry, rz);
@@ -66,6 +78,7 @@ mp.events.add('camtool:startLinearCamera', function (sx, sy, sz, ex, ey, ez, rx,
 
     script = {
         camera: mp.cameras.new('default', start, rotation, 60.0),
+        id: id,
         start: start,
         end: end,
         rotation: rotation,
@@ -75,6 +88,29 @@ mp.events.add('camtool:startLinearCamera', function (sx, sy, sz, ex, ey, ez, rx,
 
     toggle(true);
 });
+
+// MARK: - Linear target camera
+
+mp.events.add('camtool:startLinearTargetCamera', function (id, sx, sy, sz, ex, ey, ez, tx, ty, tz, d) {
+    let start = new Vector3(sx, sy, sz);
+    let end = new Vector3(ex, ey, ez);
+    let target = new Vector3(tx, ty, tz);
+    let duration = d * 1000;
+
+    script = {
+        camera: mp.cameras.new('default', start, new Vector3(0, 0, 0), 60.0),
+        id: id,
+        start: start,
+        end: end,
+        target: target,
+        duration: duration,
+        startTime: new Date().getTime()
+    }
+
+    toggle(true);
+});
+
+// MARK: - Render
 
 mp.events.add('render', () => {
     if (!script) return;
@@ -88,6 +124,15 @@ mp.events.add('render', () => {
         return;
     }
 
-    let pos = lerp(script.start, script.end, progress);
-    script.camera.setCoord(pos.x, pos.y, pos.z);
+    if (script.id == 'linear') {
+        let pos = lerp(script.start, script.end, progress);
+        script.camera.setCoord(pos.x, pos.y, pos.z);
+    } else if (script.id == 'linear_target') {
+        let pos = lerp(script.start, script.end, progress);
+
+        let rot = angle(pos, script.target);
+
+        script.camera.setCoord(pos.x, pos.y, pos.z);
+        script.camera.setRot(rot.x, rot.y, rot.z, 2);
+    }
 });
