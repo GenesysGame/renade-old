@@ -55,6 +55,14 @@ input {
     right: 20px;
 }
 
+    .window > .tab_content {
+        display: none;
+    }
+
+    .window > .selected_tab_content {
+        display: inherit;
+    }
+
 .list {
     background-color: rgba(255, 255, 255, 0);
     border-width: 0px;
@@ -62,20 +70,25 @@ input {
     padding-left: 20px;
 }
 
-.tab {
-    text-align: left;
-    font-family: 'roboto';
-    color: #fff;
-    font-size: 13px;
+.tabs {
+    display: flex;
 }
+
+    .tabs > div {
+        text-align: left;
+        font-family: 'roboto';
+        color: #fff;
+        font-size: 13px;
+        display: inline;
+        padding-right: 20px;
+        cursor: pointer;
+    }
+
+    .tabs > .selected_tab {
+        font-weight: bold;
+    }
 
 button.main {
     position: absolute;
     right: 20px;
-}
-
-/* ids */
-
-#selected {
-    font-weight: bold;
 }
