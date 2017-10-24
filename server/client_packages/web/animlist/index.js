@@ -7,11 +7,11 @@ var total = 0;
 function load(e){
     $('.total').text('LOADING...');
     if(e == 'forward'){
-        $.get( "http://127.0.0.1/admin/animations/get", { min: (last+1), max: (last+500)}, function( data ) {
+        $.get( "http://127.0.0.1/admin/animations/get", { min: (last+1), max: (last+200)}, function( data ) {
             data.forEach(function (v, i) {
                 var group = $('<optgroup></optgroup>');
                 group.attr('label', v['name']);
-                group.attr('id', last+i-499);
+                group.attr('id', last+i-199);
                 $.each(v['props'], function (s, p) {
                     var option = $('<option></option>');
                     option.val([v['name'], p]);
@@ -22,13 +22,14 @@ function load(e){
             });
             $('.total').text('');
         } , "json" );
-        for (var i = last - 501; i >= last-1000; i--) {
+        for (var i = last - 801; i >= last-1000; i--) {
             $('#'+i).remove();
         }
-        last += 500;
+        last += 200;
     } else{
         if(last > 1000){
-            $.get( "http://127.0.0.1/admin/animations/get", { min: (last+1), max: (last+500)}, function( data ) {
+            $.get( "http://127.0.0.1/admin/animations/get", { min: (last-1200), max: (last-1001)}, function( data ) {
+                var groups = [];
                 data.forEach(function (v, i) {
                     var group = $('<optgroup></optgroup>');
                     group.attr('label', v['name']);
@@ -39,14 +40,15 @@ function load(e){
                         option.text(p);
                         group.append(option);
                     });
-                    list.prepend(group);
+                    groups.push(group);
                 });
+                list.prepend(groups);
                 $('.total').text('');
             } , "json" );
-            for (var i = last; i > last-500; i--) {
+            for (var i = last; i > last-200; i--) {
                 $('#'+i).remove();
             }
-            last -= 500;
+            last -= 200;
         }
     }
 }
