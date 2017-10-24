@@ -7,20 +7,42 @@ var total = 0;
 function load(e){
     $('.total').text('LOADING...');
     if(e == 'forward'){
-        $.get( "http://127.0.0.1/admin/animations/get?min="+(last+1)+'&max='+(last+500), function( data ) {
-            list.append(data);
+        $.get( "http://127.0.0.1/admin/animations/get", { min: (last+1), max: (last+500)}, function( data ) {
+            data.forEach(function (v, i) {
+                var group = $('<optgroup></optgroup>');
+                group.attr('label', v['name']);
+                group.attr('id', last+i-499);
+                $.each(v['props'], function (s, p) {
+                    var option = $('<option></option>');
+                    option.val([v['name'], p]);
+                    option.text(p);
+                    group.append(option);
+                });
+                list.append(group);
+            });
             $('.total').text('');
-        });
+        } , "json" );
         for (var i = last - 501; i >= last-1000; i--) {
             $('#'+i).remove();
         }
         last += 500;
     } else{
         if(last > 1000){
-            $.get( "http://127.0.0.1/admin/animations/get?min="+(last-1500)+'&max='+(last-1001), function( data ) {
-                list.prepend(data);
+            $.get( "http://127.0.0.1/admin/animations/get", { min: (last+1), max: (last+500)}, function( data ) {
+                data.forEach(function (v, i) {
+                    var group = $('<optgroup></optgroup>');
+                    group.attr('label', v['name']);
+                    group.attr('id', last-1000+i);
+                    $.each(v['props'], function (s, p) {
+                        var option = $('<option></option>');
+                        option.val([v['name'], p]);
+                        option.text(p);
+                        group.append(option);
+                    });
+                    list.prepend(group);
+                });
                 $('.total').text('');
-            });
+            } , "json" );
             for (var i = last; i > last-500; i--) {
                 $('#'+i).remove();
             }
