@@ -9,3 +9,7 @@ let guntoolWindow = {
 }
 guntoolWindow.browser.active = false;
 keyboard.bindWindow(guntoolWindow);
+
+mp.events.add('guntool:givePressed', function (hash) {
+    mp.events.callRemote('guntool:giveWeapon', hash);
+});
