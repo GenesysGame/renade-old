@@ -13,3 +13,8 @@ keyboard.bindWindow(guntoolWindow);
 mp.events.add('guntool:givePressed', function (hash) {
     mp.events.callRemote('guntool:giveWeapon', hash);
 });
+
+mp.events.add('guntool:modifyPressed', function () {
+    let player = mp.players.local;
+    mp.gui.chat.push('player ' + Object.keys(mp.game.weapon));
+});
