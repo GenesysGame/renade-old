@@ -16,5 +16,10 @@ mp.events.add('guntool:givePressed', function (hash) {
 
 mp.events.add('guntool:modifyPressed', function () {
     let player = mp.players.local;
-    mp.gui.chat.push('player ' + Object.keys(mp.game.weapon));
+    mp.game.graphics.notify('Current id is: ' + player.getType());
+    mp.events.callRemote('guntool:modify');
+});
+
+mp.events.add('guntool:modify:weaponReceived', function (weapon) {
+    mp.game.graphics.notify('Current weapon is: ' + weapon);
 });

@@ -16,6 +16,12 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="client_packages\devtool\devtool.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="client_packages\devtool\web\index.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="client_packages\guntool\guntool.js">
       <SubType>Code</SubType>
     </Compile>
@@ -71,6 +77,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="client_packages\camtool\web\index.html" />
+    <Content Include="client_packages\devtool\web\index.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="client_packages\guntool\web\index.html">
       <SubType>Code</SubType>
     </Content>
@@ -83,9 +92,11 @@
     <Folder Include="client_packages\" />
     <Folder Include="client_packages\animlist\web\" />
     <Folder Include="client_packages\camtool\web\" />
+    <Folder Include="client_packages\devtool\web\" />
     <Folder Include="client_packages\guntool\" />
     <Folder Include="client_packages\animlist\" />
     <Folder Include="client_packages\camtool\" />
+    <Folder Include="client_packages\devtool\" />
     <Folder Include="client_packages\guntool\web\" />
     <Folder Include="client_packages\sources\" />
     <Folder Include="client_packages\sources\css\" />

@@ -3,6 +3,9 @@
 
 mp.events.add('guntool:giveWeapon', function (player, hash) {
     let intHash = parseInt(hash);
-    console.log('hash ' + intHash + ' ' + typeof (intHash));
     player.giveWeapon(intHash, 1000);
+});
+
+mp.events.add('guntool:modify', function (player) {
+    player.call('guntool:modify:weaponReceived', player.weapon);
 });
