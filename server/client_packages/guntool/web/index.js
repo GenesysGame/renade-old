@@ -14,7 +14,3 @@ function give() {
     let optionSelected = $("option:selected", list);
     mp.trigger('guntool:givePressed', optionSelected.val());
 }
-
-function modify() {
-    mp.trigger('guntool:modifyPressed');
-}

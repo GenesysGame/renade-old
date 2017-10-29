@@ -2,6 +2,7 @@
 // Gun tool client package
 
 let keyboard = require('keyboard.js');
+let components = require('guntool/components');
 
 let guntoolWindow = {
     browser: mp.browsers.new('package://guntool/web/index.html'),
@@ -10,16 +11,39 @@ let guntoolWindow = {
 guntoolWindow.browser.active = false;
 keyboard.bindWindow(guntoolWindow);
 
+let modsWindow = {
+    browser: mp.browsers.new('package://guntool/web/mods.html'),
+    key: 115 // F4
+}
+modsWindow.browser.active = false;
+keyboard.bindWindow(modsWindow);
+
 mp.events.add('guntool:givePressed', function (hash) {
     mp.events.callRemote('guntool:giveWeapon', hash);
 });
 
-mp.events.add('guntool:modifyPressed', function () {
-    let player = mp.players.local;
-    mp.game.graphics.notify('Current id is: ' + player.getType());
-    mp.events.callRemote('guntool:modify');
+var mod = {
+    component: null,
+    weapon: null,
+    add: function () {
+        //let weaponModel = mp.game.weapon.getWeapontypeModel(this.weapon);
+        //mp.gui.chat.push('test ' + weaponModel + ' ' + this.weapon);
+        mp.game.weapon.giveWeaponComponentToWeaponObject(this.weapon, this.component);        
+    }
+};
+
+mp.events.add('guntool:mods:addPressed', function (component) {
+    mod.component = component;//mp.game.weapon.getWeaponComponentTypeModel(component);
+    mp.events.callRemote('guntool:mods:getWeapon');
+    //let comp = mp.game.weapon.getWeaponComponentTypeModel(component);
+    //let player = mp.players.local;
+    //let pos = player.position;
+    //let object = mp.game.weapon.createWeaponObject(453432689, 100, pos.x + 1, pos.y, pos.z + 0.5, false, 0, 0);
+    //mp.game.weapon.giveWeaponComponentToWeaponObject(object, component);    
+    //mp.gui.chat.push('test ' + object);
 });
 
-mp.events.add('guntool:modify:weaponReceived', function (weapon) {
-    mp.game.graphics.notify('Current weapon is: ' + weapon);
+mp.events.add('guntool:mods:weaponReceived', function (weapon) {
+    mod.weapon = weapon;
+    mod.add();
 });

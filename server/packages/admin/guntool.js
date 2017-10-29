@@ -6,6 +6,6 @@ mp.events.add('guntool:giveWeapon', function (player, hash) {
     player.giveWeapon(intHash, 1000);
 });
 
-mp.events.add('guntool:modify', function (player) {
-    player.call('guntool:modify:weaponReceived', player.weapon);
+mp.events.add('guntool:mods:getWeapon', function (player) {
+    player.call('guntool:mods:weaponReceived', player.weapon);
 });

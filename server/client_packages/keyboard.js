@@ -12,7 +12,7 @@ function bindWindow(window, condition) {
         let visible = !window.browser.active;
         window.browser.active = visible;
         mp.gui.cursor.visible = visible;
-        mp.gui.chat.show(!visible);
+        //mp.gui.chat.show(!visible);
     });
 }
 
