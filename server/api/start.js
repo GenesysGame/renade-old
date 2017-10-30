@@ -51,5 +51,5 @@ app.get("/admin/animations/get", function(request, response){
     response.json(list);
     response.end();
 });
-app.listen(80, '188.120.235.38');
+app.listen(8001);
 console.log('Server running on 80 port');
