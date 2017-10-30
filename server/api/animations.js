@@ -1,4 +1,5 @@
-﻿var animations = [
+﻿module.exports = {
+	animations: [
 ['abigail_mcs_1_concat-0','csb_abigail_dual-0','exportcamera-0','player_zero_dual-0'],
 ['abigail_mcs_1_concat-10','csb_abigail_dual-10','exportcamera-10','player_zero_dual-10'],
 ['abigail_mcs_1_concat-11','csb_abigail_dual-11','exportcamera-11','player_zero_dual-11'],
@@ -12899,4 +12900,5 @@
 ['weapons@submg@','aim_2_holster','aim_high_loop','aim_high_static','aim_low_loop','aim_low_static','aim_med_loop','aim_med_static','breathe_running_add','breathe_stand_add','breathe_walking_add','breathe_walking_bwd_add','fire_high','fire_low','fire_med','holster_2_aim','idle','idle_2_aim_fwd_high','idle_2_aim_fwd_low','idle_2_aim_fwd_med','idle_2_aim_left_high','idle_2_aim_left_low','idle_2_aim_left_med','idle_2_aim_right_high','idle_2_aim_right_low','idle_2_aim_right_med','run','unholster','walk','walk_additive_backward','walk_additive_forward','walk_additive_left','walk_additive_right','wall_block'],
 ['weapons@tennis@male','idle','run','walk'],
 ['weapons@unarmed','aim_high_loop','aim_low_loop','aim_med_loop','breathe_running_add','breathe_stand_add','breathe_walking_add','breathe_walking_bwd_add','holster','ik_bounce_running','ik_bounce_walking','ik_bounce_zero','unholster','walk_additive_backward','walk_additive_forward','walk_additive_left','walk_additive_right'],
-];
+]
+};

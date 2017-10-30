@@ -2,31 +2,70 @@
 // Animations list view controller
 
 let list = $('.list');
-var total = 0;
+var totalPages = 0;
 
-animations.forEach(function (v, i) {
-    if (i >= 1000) { return; }
-    var group = $('<optgroup></optgroup>');
-    group.attr('label', v[0]);
-    $.each(v, function (si) {
-        if (si > 0) {
-            var option = $('<option></option>');
-            option.val([v[0], v[si]]);
-            option.text(v[si]);
-            total = total + 1;
+function load(){
+    $('#total').text('LOADING...');
+    isLoading = true;
+    list.empty();
+    $.get( "http://127.0.0.1/admin/animations/get", { page: page}, function( data ) {
+        page = data.page;
+        totalPages = data.total;
+        data = data.data
+        data.forEach(function (v, i) {
+            var group = $('<optgroup></optgroup>');
+            group.attr('label', v['name']);
+            group.attr('class', page);
+            $.each(v['props'], function (s, p) {
+                var option = $('<option></option>');
+                option.val([v['name'], p]);
+                option.text(p);
+                group.append(option);
+            });
+            list.append(group);
+        });
+        $('#total').text('/'+totalPages);
+        $('#page').attr('max', totalPages);;
+        $('#page').val(page);
+        isLoading = false;
+    } , "json" );
+}
 
-            group.append(option);
+var page = 0;
+var isLoading = false;
+
+load();
+
+$('#page').keydown(function(e) {
+    if(e.keyCode === 13 && !isLoading){
+        if($(this).val() > totalPages){
+            $(this).val(totalPages);
+        } else if($(this).val() < 0){
+            $(this).val(0);
         }
-    });
-    list.append(group);
+        page = $(this).val();
+        load();
+    }
 });
 
-var option = $('<option></option>');
-option.val(['', '']);
-option.text('exit');
-list.append(option);
+$('#next').click(function(){
+    if(page != totalPages && !isLoading){
+        page += 1;
+        load();
+    }
+});
 
-$('.total').html(total + ' animations');
+$('#prev').click(function(){
+    if(page > 0 && !isLoading){
+        page -= 1;
+        load('back');
+    }
+});
+
+$('#stop').click(function(){
+    mp.trigger('animlist:animationSelected', '', '');
+});
+
 
 list.on('change', function (e) {
     let optionSelected = $("option:selected", this);
