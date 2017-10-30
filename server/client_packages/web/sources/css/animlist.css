@@ -44,6 +44,9 @@ optgroup {
 p {
     font-family: 'roboto';
     color: #999;
-    font-size: 13px;
+    font-size: 15px;
 }
 
+.info *{
+    display: inline-block;
+}
