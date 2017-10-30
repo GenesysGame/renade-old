@@ -65,6 +65,7 @@ function start() {
         z: parseFloat(endRot.find('#z').val() || startRotation.z)
     }
 
+    let clockwise = elem.find('#clockwise').is(":checked");
     let duration = parseFloat(elem.find('#duration').val() || 5);
 
     let id = elem.attr('id');
@@ -76,7 +77,7 @@ function start() {
                 end.x, end.y, end.z,
                 startRotation.x, startRotation.y, startRotation.z,
                 endRotation.x, endRotation.y, endRotation.z,
-                duration
+                clockwise, duration
             );
             break;
         case 'linear_target':

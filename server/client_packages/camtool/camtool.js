@@ -17,6 +17,7 @@ keyboard.bindWindow(camtoolWindow, function () {
     if (!freecam.global.fly.flying) return false;
     if (script) {
         toggle(false);
+        script = null;
         return false;
     } else {
         if (camtoolWindow.browser.active) { // camtool window will disappear
@@ -61,6 +62,21 @@ function lerp(v1, v2, delta) {
     );
 }
 
+// calculate rotation offset
+function lerpRot(v1, v2, delta, clockwise) {
+    var endZ = v2.z;
+    if (endZ < v1.z && !clockwise) {
+        endZ += 360;
+    } else if (endZ > v1.z && clockwise) {
+        endZ -= 360;
+    }
+    return new Vector3(
+        v1.x + ((v2.x - v1.x) * delta),
+        v1.y + ((v2.y - v1.y) * delta),
+        v1.z + ((endZ - v1.z) * delta)
+    );
+}
+
 // calculate an angle between vectors OA and OB
 function angle(current, target) {
     let a = {
@@ -75,7 +91,7 @@ function angle(current, target) {
 }
 // MARK: - Linear camera
 
-mp.events.add('camtool:startLinearCamera', function (id, sx, sy, sz, ex, ey, ez, srx, sry, srz, erx, ery, erz, d) {
+mp.events.add('camtool:startLinearCamera', function (id, sx, sy, sz, ex, ey, ez, srx, sry, srz, erx, ery, erz, clockwise, d) {
     let start = new Vector3(sx, sy, sz);
     let end = new Vector3(ex, ey, ez);
     let startRotation = new Vector3(srx, sry, srz);
@@ -89,6 +105,7 @@ mp.events.add('camtool:startLinearCamera', function (id, sx, sy, sz, ex, ey, ez,
         end: end,
         startRotation: startRotation,
         endRotation: endRotation,
+        clockwise: clockwise,
         duration: duration,
         startTime: new Date().getTime()
     }
@@ -133,7 +150,7 @@ mp.events.add('render', () => {
 
     if (script.id == 'linear') {
         let pos = lerp(script.start, script.end, progress);
-        let rot = lerp(script.startRotation, script.endRotation, progress);
+        let rot = lerpRot(script.startRotation, script.endRotation, progress, script.clockwise);
         script.camera.setCoord(pos.x, pos.y, pos.z);
         script.camera.setRot(rot.x, rot.y, rot.z, 2);
     } else if (script.id == 'linear_target') {
