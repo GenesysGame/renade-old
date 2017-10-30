@@ -62,6 +62,10 @@ $('#prev').click(function(){
     }
 });
 
+$('#stop').click(function(){
+    mp.trigger('animlist:animationSelected', '', '');
+});
+
 
 list.on('change', function (e) {
     let optionSelected = $("option:selected", this);
