@@ -52,4 +52,4 @@ app.get("/admin/animations/get", function(request, response){
     response.end();
 });
 app.listen(8001);
-console.log('Server running on 80 port');
+console.log('Server running on 8001 port');
