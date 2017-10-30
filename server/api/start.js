@@ -1,4 +1,6 @@
-﻿'use strict';
+﻿#!/usr/bin/env node
+'use strict';
+
 var express = require('express');
 var app = express();
 var anim = require('./animations.js');
