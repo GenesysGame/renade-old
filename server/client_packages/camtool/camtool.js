@@ -15,10 +15,15 @@ camtoolWindow.browser.active = false;
 
 keyboard.bindWindow(camtoolWindow, function () {
     if (!freecam.global.fly.flying) return false;
-    if (camtoolWindow.browser.active) { // camtool window will disappear
-        freecam.global.canExitFreecam = true;
-    } else { // camtool window will appear
-        freecam.global.canExitFreecam = false;
+    if (script) {
+        toggle(false);
+        return false;
+    } else {
+        if (camtoolWindow.browser.active) { // camtool window will disappear
+            freecam.global.canExitFreecam = true;                    
+        } else { // camtool window will appear
+            freecam.global.canExitFreecam = false;
+        }
     }
     return true;
 });
@@ -70,18 +75,20 @@ function angle(current, target) {
 }
 // MARK: - Linear camera
 
-mp.events.add('camtool:startLinearCamera', function (id, sx, sy, sz, ex, ey, ez, rx, ry, rz, d) {
+mp.events.add('camtool:startLinearCamera', function (id, sx, sy, sz, ex, ey, ez, srx, sry, srz, erx, ery, erz, d) {
     let start = new Vector3(sx, sy, sz);
     let end = new Vector3(ex, ey, ez);
-    let rotation = new Vector3(rx, ry, rz);
+    let startRotation = new Vector3(srx, sry, srz);
+    let endRotation = new Vector3(erx, ery, erz);
     let duration = d * 1000;
 
     script = {
-        camera: mp.cameras.new('default', start, rotation, 60.0),
+        camera: mp.cameras.new('default', start, startRotation, 60.0),
         id: id,
         start: start,
         end: end,
-        rotation: rotation,
+        startRotation: startRotation,
+        endRotation: endRotation,
         duration: duration,
         startTime: new Date().getTime()
     }
@@ -126,12 +133,12 @@ mp.events.add('render', () => {
 
     if (script.id == 'linear') {
         let pos = lerp(script.start, script.end, progress);
+        let rot = lerp(script.startRotation, script.endRotation, progress);
         script.camera.setCoord(pos.x, pos.y, pos.z);
+        script.camera.setRot(rot.x, rot.y, rot.z, 2);
     } else if (script.id == 'linear_target') {
         let pos = lerp(script.start, script.end, progress);
-
         let rot = angle(pos, script.target);
-
         script.camera.setCoord(pos.x, pos.y, pos.z);
         script.camera.setRot(rot.x, rot.y, rot.z, 2);
     }

@@ -52,11 +52,17 @@ function start() {
         z: parseFloat(targetElem.find('#z').val() || 0)
     }
 
-    let rotElem = elem.find('#rotation');
-    let rotation = {
-        x: parseFloat(rotElem.find('#x').val() || 0),
-        y: parseFloat(rotElem.find('#y').val() || 0),
-        z: parseFloat(rotElem.find('#z').val() || 0)
+    let startRot = elem.find('#startRotation');
+    let startRotation = {
+        x: parseFloat(startRot.find('#x').val() || 0),
+        y: parseFloat(startRot.find('#y').val() || 0),
+        z: parseFloat(startRot.find('#z').val() || 0)
+    }
+    let endRot = elem.find('#endRotation');
+    let endRotation = {
+        x: parseFloat(endRot.find('#x').val() || startRotation.x),
+        y: parseFloat(endRot.find('#y').val() || startRotation.y),
+        z: parseFloat(endRot.find('#z').val() || startRotation.z)
     }
 
     let duration = parseFloat(elem.find('#duration').val() || 5);
@@ -68,7 +74,8 @@ function start() {
                 id,
                 start.x, start.y, start.z,
                 end.x, end.y, end.z,
-                rotation.x, rotation.y, rotation.z,
+                startRotation.x, startRotation.y, startRotation.z,
+                endRotation.x, endRotation.y, endRotation.z,
                 duration
             );
             break;
