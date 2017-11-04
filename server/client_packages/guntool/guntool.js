@@ -18,8 +18,8 @@ let modsWindow = {
 modsWindow.browser.active = false;
 keyboard.bindWindow(modsWindow);
 
-mp.events.add('guntool:givePressed', function (hash) {
-    mp.events.callRemote('guntool:giveWeapon', hash);
+mp.events.add('guntool:givePressed', function (hash, ammo) {
+    mp.events.callRemote('guntool:giveWeapon', hash, ammo);
 });
 
 var mod = {

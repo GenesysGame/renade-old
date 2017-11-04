@@ -12,5 +12,6 @@ Object.keys(weapons.list).forEach(function (name, i) {
 
 function give() {
     let optionSelected = $("option:selected", list);
-    mp.trigger('guntool:givePressed', optionSelected.val());
+    let ammo = $('#ammo').val();
+    mp.trigger('guntool:givePressed', optionSelected.val(), Math.abs(ammo));
 }
