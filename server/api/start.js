@@ -1,55 +1,34 @@
-﻿#!/usr/bin/env node
-'use strict';
+﻿var express = require('express'),
+    http = require('http'),
+    app = express(),
+    anim = require('./routes/anim'),
+    conf = require('./config'),
+    clothes = require('./routes/clothes'),
+    animlist = require('./routes/anim/animations.js'),
+    total = 0,
+    pagesize = 200;
 
-var express = require('express');
-var app = express();
-var anim = require('./animations.js');
-var animations = anim.animations;
-var total = 0;
-animations.forEach(function(v, i) {
-	total += 1;
+animlist.animations.forEach(function(v, i) {
+    total += 1;
 });
-var pagesize = 200;
+console.log('Loaded',total,'animations');
 var totalPages  = Math.floor(total / pagesize);
-console.log('Loaded ' + total + ' animations');
-app.get("/admin/animations/get", function(request, response){
-    response.header('Content-Type', 'application/json');
-    response.header("Access-Control-Allow-Origin", "*");
-    var page = parseInt(request.query.page);
-	var animations = anim.animations;
-    var list = {
-    	page: page,
-    	total: totalPages,
-    	data: []
-    };
-    if(page == 0){
-    	var min = page * pagesize;
-    	var max = min + pagesize;
-    } else{
-    	var min = page * pagesize + 1;
-    	var max = min + pagesize - 1;
-    }
-    console.log(page);
-    console.log(min, max);
-    animations.forEach(function (v, i) {
-    	if(i <= max && i >= min){
-    		var props = [];
-	        if (v.length > 0) {
-	        	v.forEach(function(s, i, v) {
-	        		if(i != 0){
-	        			props.push(s);
-	        		}
-	        	});
-	        }
-		    var pack = {
-		    	name: v[0], 
-		    	props: props
-		    };
-		    list.data.push(pack);
-    	}
-	});
-    response.json(list);
-    response.end();
+
+app.get('/admin/animations/get', function(request, response){
+    anim.get(request, response, totalPages, pagesize);
 });
-app.listen(8001);
-console.log('Server running on 8001 port');
+
+app.get('/admin/clothes/get', function(request, response){
+    clothes.get(request, response);
+});
+
+app.delete('/admin/clothes/delete', function(request, response){
+    clothes.delete(request, response);
+}); 
+
+app.put('/admin/clothes/put', function(request, response){
+    clothes.put(request, response);
+});
+
+app.listen(conf.get('port'));
+console.log('Server running on '+conf.get("port")+' port');
