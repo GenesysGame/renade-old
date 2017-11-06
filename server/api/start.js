@@ -30,5 +30,10 @@ app.put('/admin/clothes/put', function(request, response){
     clothes.put(request, response);
 });
 
+app.options('*', function(request, response){
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+    response.end();
+});
 app.listen(conf.get('port'));
 console.log('Server running on '+conf.get("port")+' port');

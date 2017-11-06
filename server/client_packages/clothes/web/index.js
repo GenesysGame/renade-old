@@ -22,7 +22,7 @@ $('#delete').click(function(){
 	    url: 'http://127.0.0.1:8001/admin/clothes/delete',
 	    method: "DELETE",
 	    success: function(data) {
-	        console.log('data');
+	        console.log(data);
 	    }
 	});
 	update();
@@ -37,10 +37,9 @@ $('#save').click(function(){
 		$.ajax({
 		    url: 'http://127.0.0.1:8001/admin/clothes/put',
 		    data: $('#name').val(),
-		    method: "PUT",
-		    success: function(data) {
-		        console.log('data');
-		    }
+		    method: "PUT"
+		}).done(function(data){
+			console.log(data);
 		});
 		$('#name').val('');
 		update();
