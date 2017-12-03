@@ -4,7 +4,7 @@
 let keyboard = require('keyboard.js');
 let freecam = require('camtool/freecam.js');
 
-freecam.init();
+var free = freecam.init();
 
 let camtoolWindow = {
     browser: mp.browsers.new('package://camtool/web/index.html'),
@@ -14,16 +14,16 @@ let camtoolWindow = {
 camtoolWindow.browser.active = false;
 
 keyboard.bindWindow(camtoolWindow, function () {
-    if (!freecam.global.fly.flying) return false;
+    if (!free.fly.flying) return false;
     if (script) {
         toggle(false);
         script = null;
         return false;
     } else {
         if (camtoolWindow.browser.active) { // camtool window will disappear
-            freecam.global.canExitFreecam = true;                    
+            free.canExitFreecam = true;                    
         } else { // camtool window will appear
-            freecam.global.canExitFreecam = false;
+            free.canExitFreecam = false;
         }
     }
     return true;

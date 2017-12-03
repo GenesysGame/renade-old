@@ -2,11 +2,9 @@
 // Camera tool: freecam
 
 exports.init = init;
-exports.global = global;
-
-var global = {};
 
 function init() {
+    var setting = {};    
     const controlsIds =
         {
             F5: 327,
@@ -19,19 +17,19 @@ function init() {
             LCtrl: 326
         };
 
-    global.fly = {
+    setting.fly = {
         flying: false, df: 0.5, dl: 0.5, dh: 0.5, f: 0.5, l: 0.5, h: 0.5,
         maxSpeed: 2.0
     };
-    global.canExitFreecam = true;
-    global.gameplayCam = mp.cameras.new("gameplay");
+    setting.canExitFreecam = true;
+    setting.gameplayCam = mp.cameras.new("gameplay");
 
     mp.events.add("render", () => {
         let controls = mp.game.controls;
-        let fly = global.fly;
-        const direction = global.gameplayCam.getDirection();
+        let fly = setting.fly;
+        const direction = setting.gameplayCam.getDirection();
 
-        if (controls.isControlJustPressed(0, controlsIds.F5) && global.canExitFreecam) {
+        if (controls.isControlJustPressed(0, controlsIds.F5) && setting.canExitFreecam) {
             fly.flying = !fly.flying;
 
             const player = mp.players.local;
@@ -144,4 +142,6 @@ function init() {
             }
         }
     });
+
+    return setting;
 };
