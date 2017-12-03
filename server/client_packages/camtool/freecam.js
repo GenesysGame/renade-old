@@ -4,7 +4,7 @@
 exports.init = init;
 exports.global = global;
 
-var global = null;
+var global = {};
 
 function init() {
     const controlsIds =
