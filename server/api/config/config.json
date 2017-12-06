@@ -1,23 +1,9 @@
 {
 	"port": 8001,
     "db": {
-        "connection": "mongodb://localhost",
-        "name": "db_name",
-        "options": {
-            "server": {
-                "socketOptions": {
-                    "keepAlive": 1
-                }
-            }
-        }
-    },
-    "session": {
-        "secret": "secret_key",
-        "key": "cid",
-        "cookie": {
-            "path": "/",
-            "httpOnly": true,
-            "maxAge": null
-        }
+        "connection": "188.120.235.38",
+        "database": "renade",
+        "user": "rage",
+        "pass": "24Svjatogor93"
     }
 }

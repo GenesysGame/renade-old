@@ -1,5 +1,6 @@
 ﻿var express = require('express'),
     http = require('http'),
+    mysql = require('mysql'),
     app = express(),
     anim = require('./routes/anim'),
     conf = require('./config'),
@@ -19,7 +20,7 @@ app.get('/admin/animations/get', function(request, response){
 });
 
 app.get('/admin/clothes/get', function(request, response){
-    clothes.get(request, response);
+    clothes.get(request, response, conf, mysql);
 });
 
 app.delete('/admin/clothes/delete', function(request, response){
