@@ -1,0 +1,45 @@
+{
+	"Map": {
+		"Objects": {
+			"MapObject": [
+				{
+					"Type": "Prop",
+					"Position": {
+						"X": "-277.224182",
+						"Y": "6626.178",
+						"Z": "6.42342854"
+					},
+					"Rotation": {
+						"X": "0",
+						"Y": "0",
+						"Z": "0"
+					},
+					"Hash": "-1239742687",
+					"Dynamic": "false",
+					"Quaternion": {
+						"X": "0",
+						"Y": "0",
+						"Z": "0",
+						"W": "1"
+					},
+					"Door": "false"
+				}
+			]
+		},
+		"RemoveFromWorld": "",
+		"Markers": "",
+		"Metadata": {
+			"Creator": "GenesysGame",
+			"Name": "test",
+			"Description": "",
+			"LoadingPoint": {
+				"_xsi:nil": "true"
+			},
+			"TeleportPoint": {
+				"_xsi:nil": "true"
+			}
+		},
+		"_xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+		"_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+	}
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Map xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Objects>
+    <MapObject>
+      <Type>Prop</Type>
+      <Position>
+        <X>-277.224182</X>
+        <Y>6626.178</Y>
+        <Z>6.42342854</Z>
+      </Position>
+      <Rotation>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+      </Rotation>
+      <Hash>-1239742687</Hash>
+      <Dynamic>false</Dynamic>
+      <Quaternion>
+        <X>0</X>
+        <Y>0</Y>
+        <Z>0</Z>
+        <W>1</W>
+      </Quaternion>
+      <Door>false</Door>
+    </MapObject>
+  </Objects>
+  <RemoveFromWorld />
+  <Markers />
+  <Metadata>
+    <Creator>GenesysGame</Creator>
+    <Name>test</Name>
+    <Description />
+    <LoadingPoint xsi:nil="true" />
+    <TeleportPoint xsi:nil="true" />
+  </Metadata>
+</Map>
