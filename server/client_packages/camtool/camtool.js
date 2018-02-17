@@ -55,7 +55,7 @@ function toggle(toggle) {
 
 // calculate an offset between start point and end point for delta time
 function lerp(v1, v2, delta) {
-    return new Vector3(
+    return new mp.Vector3(
         v1.x + ((v2.x - v1.x) * delta),
         v1.y + ((v2.y - v1.y) * delta),
         v1.z + ((v2.z - v1.z) * delta)
@@ -70,7 +70,7 @@ function lerpRot(v1, v2, delta, clockwise) {
     } else if (endZ > v1.z && clockwise) {
         endZ -= 360;
     }
-    return new Vector3(
+    return new mp.Vector3(
         v1.x + ((v2.x - v1.x) * delta),
         v1.y + ((v2.y - v1.y) * delta),
         v1.z + ((endZ - v1.z) * delta)
@@ -87,15 +87,15 @@ function angle(current, target) {
     let rotZ = (Math.atan2(a.y, a.x) * 180 / Math.PI) - 90;
     let rotX = Math.atan2(a.z, Math.sqrt(Math.pow(a.x, 2) + Math.pow(a.y, 2))) * 180 / Math.PI;
 
-    return new Vector3(rotX, 0, rotZ);
+    return new mp.Vector3(rotX, 0, rotZ);
 }
 // MARK: - Linear camera
 
 mp.events.add('camtool:startLinearCamera', function (id, sx, sy, sz, ex, ey, ez, srx, sry, srz, erx, ery, erz, clockwise, d) {
-    let start = new Vector3(sx, sy, sz);
-    let end = new Vector3(ex, ey, ez);
-    let startRotation = new Vector3(srx, sry, srz);
-    let endRotation = new Vector3(erx, ery, erz);
+    let start = new mp.Vector3(sx, sy, sz);
+    let end = new mp.Vector3(ex, ey, ez);
+    let startRotation = new mp.Vector3(srx, sry, srz);
+    let endRotation = new mp.Vector3(erx, ery, erz);
     let duration = d * 1000;
 
     script = {
@@ -116,13 +116,13 @@ mp.events.add('camtool:startLinearCamera', function (id, sx, sy, sz, ex, ey, ez,
 // MARK: - Linear target camera
 
 mp.events.add('camtool:startLinearTargetCamera', function (id, sx, sy, sz, ex, ey, ez, tx, ty, tz, d) {
-    let start = new Vector3(sx, sy, sz);
-    let end = new Vector3(ex, ey, ez);
-    let target = new Vector3(tx, ty, tz);
+    let start = new mp.Vector3(sx, sy, sz);
+    let end = new mp.Vector3(ex, ey, ez);
+    let target = new mp.Vector3(tx, ty, tz);
     let duration = d * 1000;
 
     script = {
-        camera: mp.cameras.new('default', start, new Vector3(0, 0, 0), 60.0),
+        camera: mp.cameras.new('default', start, new mp.Vector3(0, 0, 0), 60.0),
         id: id,
         start: start,
         end: end,

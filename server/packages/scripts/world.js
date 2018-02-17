@@ -33,7 +33,3 @@ mp.events.add({
     "playerSpawn": playerSpawned,
     "playerCommand": commandHandler
 });
-
-mp.environment.time.hour = 10;
-mp.environment.time.minute = 0;
-mp.environment.time.second = 0;
