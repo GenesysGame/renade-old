@@ -5,23 +5,22 @@ var express = require('express');
 var app = express();
 var anim = require('./animations.js');
 var animations = anim.animations;
-var total = 0;
-animations.forEach(function(v, i) {
-	total += 1;
-});
+var total = animations.length;
 var pagesize = 200;
 var totalPages  = Math.floor(total / pagesize);
 console.log('Loaded ' + total + ' animations');
 app.get("/admin/animations/get", function(request, response){
     response.header('Content-Type', 'application/json');
     response.header("Access-Control-Allow-Origin", "*");
-    var page = parseInt(request.query.page);
+	var page = parseInt(request.query.page);
+	if (!page) { page = 0; };
 	var animations = anim.animations;
     var list = {
     	page: page,
     	total: totalPages,
     	data: []
-    };
+	};
+	console.log(total);
     if(page == 0){
     	var min = page * pagesize;
     	var max = min + pagesize;
