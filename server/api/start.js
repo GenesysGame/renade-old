@@ -50,5 +50,7 @@ app.get("/admin/animations/get", function(request, response){
     response.json(list);
     response.end();
 });
-app.listen(8001);
+
+
+app.listen(8001, '127.0.0.1');
 console.log('Server running on 8001 port');
