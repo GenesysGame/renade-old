@@ -4,6 +4,5 @@
   "announce": false,
   "port": 22005,
   "maxplayers": 1024,
-  "bridge": false
-	"stream-distance" : 500.0,
+	"stream-distance" : 500.0
 }
