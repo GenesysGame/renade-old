@@ -8,7 +8,7 @@ function load(){
     $('#total').text('LOADING...');
     isLoading = true;
     list.empty();
-    $.get( "http://127.0.0.1:8001/admin/animations/get", { page: page}, function( data ) {
+    $.get( "http://212.109.194.252:8001/admin/animations/get", { page: page}, function( data ) {
         page = data.page;
         totalPages = data.total;
         data = data.data
