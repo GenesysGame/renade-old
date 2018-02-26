@@ -46,6 +46,15 @@ var registered = {
         player.outputChatBox("Your position ->  X: " + x + ", Y: " + y + ", Z: " + z);
     },
 
+    "time": (player, args) => {
+        var h = parseInt(args[0]);
+        if (!h) { h = 12; }
+        var m = parseInt(args[1]);
+        if (!m) { m = 0; }
+        player.outputChatBox("Selected time: " + h + " " + m);
+        mp.world.time.set(h, m, 0);
+    },
+
     "weather": (player, args) => {
         var id = parseInt(args[0]);
         if (id == null || isNaN(id)) {
@@ -53,7 +62,7 @@ var registered = {
         }
         if (id >= 0 && id < weathers.length) {
             player.outputChatBox("Selected weather: " + weathers[id]);
-            mp.environment.weather = weathers[id];
+            mp.world.weather = weathers[id];
         } else {
             player.outputChatBox("Wheater Id should be 0.." + (weathers.length - 1));
         }
