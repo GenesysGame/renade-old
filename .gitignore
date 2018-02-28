@@ -4,3 +4,4 @@
 server/obj/*
 server/client_packages/.listcache
 server/server
+api/db/config.js

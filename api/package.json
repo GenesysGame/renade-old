@@ -1,0 +1,35 @@
+{
+  "name": "renade-api",
+  "version": "0.0.1",
+  "description": "This is API for Renade RP game server based on Rage MP for GTA 5",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GenesysGame/renade.git"
+  },
+  "keywords": [
+    "renade",
+    "ragemp",
+    "rage",
+    "gta"
+  ],
+  "author": "Genesys Game Studio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GenesysGame/renade/issues"
+  },
+  "homepage": "https://github.com/GenesysGame/renade#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "crypto": "^1.0.1",
+    "express": "^4.16.2",
+    "mysql2": "^1.5.2",
+    "sequelize": "^4.34.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.15.1"
+  }
+}
