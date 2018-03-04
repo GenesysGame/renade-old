@@ -46,6 +46,15 @@ var registered = {
         player.outputChatBox("Your position ->  X: " + x + ", Y: " + y + ", Z: " + z);
     },
 
+    "tp": (player, args) => {
+        player.outputChatBox("TP to -> " + args);
+        if (args == "zakundo") {
+            player.position = new mp.Vector3(-2060, 2923, 33);
+        } else if (args == "saveus") {
+            player.position = new mp.Vector3(2412, 3775, 40);
+        }
+    },
+
     "time": (player, args) => {
         var h = parseInt(args[0]);
         if (!h) { h = 12; }
