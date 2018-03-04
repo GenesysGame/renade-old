@@ -1,5 +1,4 @@
-﻿var db = require("./db");
-var commands = require("./commands");
+﻿var commands = require("./commands");
 
 function playerJoinHandler(player) {
     console.log(player.name + " joined the server. Total: " + mp.players.length);

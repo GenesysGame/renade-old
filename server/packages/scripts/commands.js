@@ -1,5 +1,4 @@
 ﻿var ipls = require("./ipls");
-var authorization = require("./authorization");
 let events = require('./events');
 
 let male = 1885233650;
