@@ -23,8 +23,8 @@ sequelize
     });
 
 const AccountModel = require('./model/account');
-const Account = AccountModel.Account;
-
-Account.sync();
-
 module.exports.AccountModel = AccountModel;
+const CharacterModel = require('./model/character');
+module.exports.CharacterModel = CharacterModel;
+
+sequelize.sync({ force: false });

@@ -21,15 +21,17 @@ module.exports.findAccount = function (username, callback) {
 }
 
 // get account by username
-module.exports.getAccount = function (model, callback) {
+function getAccount(model, callback) {
     Account.findOne({
-        where: model
+        where: model,
+        include: [db.CharacterModel.Character]
     }).then(account => {
         callback(account, null);
     }).catch(err => {
         callback(null, err);
-    })
+    });
 }
+module.exports.getAccount = getAccount;
 
 // get account for X-Token header
 module.exports.fetch = function (id, password, callback) {
@@ -40,7 +42,8 @@ module.exports.fetch = function (id, password, callback) {
             password: password
         }
     }).then(account => {
-        callback(account.id, null);
+        let id = account != null ? account.id : null;
+        callback(id, null);
     }).catch(err => {
         callback(null, err);
     })
@@ -52,8 +55,25 @@ module.exports.createAccount = function (username, passHash, email, callback) {
         password: passHash,
         email: email
     }).then(value => {
-        Account.getAccount({ username: username}, callback);
+        getAccount({ username: username}, callback);
     }).catch(err => {
         callback(null, err);
     });
+}
+
+module.exports.model = function (account, token) {
+    if (!account) { return null; }
+
+    var model = {
+        id: account.id,
+        username: account.username,
+        email: account.email,
+        characters: account.characters.map(charModel => {
+            return db.CharacterModel.model(charModel);
+        })
+    };
+    if (token) {
+        model['X-Token'] = token;
+    }
+    return model;
 }

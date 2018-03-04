@@ -1,4 +1,4 @@
-// API: Account controller - create account
+// API: Account controller - create account, fetch account
 
 module.exports = {
     create: create,
@@ -36,7 +36,7 @@ function create(body, callback) {
             db.AccountModel.createAccount(username, passHash, email, (account, err) => {
                 if (account) {
                     let token = pass.encryptAccount(account);
-                    callback(model(account, token), null);
+                    callback(db.AccountModel.model(account, token), null);
                 } else {
                     callback(null, err);
                 }
@@ -47,7 +47,7 @@ function create(body, callback) {
                     callback(null, err);
                 } else if (pass.validate(account.password, password)) {
                     let token = pass.encryptAccount(account);
-                    callback(model(account, token), null);
+                    callback(db.AccountModel.model(account, token), null);
                 } else {
                     callback(null, "Invalid username or password");
                 }
@@ -65,19 +65,6 @@ function fetch(accountId, callback) {
         return;
     }
     db.AccountModel.getAccount({ id: accountId }, (account, err) => {
-        callback(model(account), err);
+        callback(db.AccountModel.model(account), err);
     });
-}
-
-function model(account, token) {
-    if (!account) { return null; }
-    var model = {
-        id: account.id,
-        username: account.username,
-        email: account.email
-    };
-    if (token) {
-        model['X-Token'] = token;
-    }
-    return model;
 }

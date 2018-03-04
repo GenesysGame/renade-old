@@ -8,7 +8,7 @@ const db = require('./db');
 const bodyParser = require('body-parser');
 const pass = require('./helpers/password');
 
-const accountIdHeader = 'AccountId';
+const accountIdHeader = 'accountId';
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,5 +27,6 @@ module.exports = {
 };
 
 require('./controllers/account')();
+require('./controllers/character')();
 
 app.listen(8002);
