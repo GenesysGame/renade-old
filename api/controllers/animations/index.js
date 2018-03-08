@@ -1,26 +1,27 @@
-﻿#!/usr/bin/env node
-'use strict';
+// Animations routes for API
 
-var express = require('express');
-var app = express();
-var anim = require('./animations.js');
-var animations = anim.animations;
+const express = require('express');
+const server = require('../../server');
+
+const animations = require('../../helpers/animations').animations;
 var total = animations.length;
 var pagesize = 200;
 var totalPages  = Math.floor(total / pagesize);
-console.log('Loaded ' + total + ' animations');
-app.get("/admin/animations/get", function(request, response){
+
+module.exports = function () {
+    server.app.get('/animations', (req, res) => { get(req, res); });
+};
+
+function get(request, response) {
     response.header('Content-Type', 'application/json');
     response.header("Access-Control-Allow-Origin", "*");
-	var page = parseInt(request.query.page);
+    var page = parseInt(request.query.page);
 	if (!page) { page = 0; };
-	var animations = anim.animations;
     var list = {
     	page: page,
     	total: totalPages,
     	data: []
 	};
-	console.log(total);
     if(page == 0){
     	var min = page * pagesize;
     	var max = min + pagesize;
@@ -28,8 +29,6 @@ app.get("/admin/animations/get", function(request, response){
     	var min = page * pagesize + 1;
     	var max = min + pagesize - 1;
     }
-    console.log(page);
-    console.log(min, max);
     animations.forEach(function (v, i) {
     	if(i <= max && i >= min){
     		var props = [];
@@ -49,8 +48,4 @@ app.get("/admin/animations/get", function(request, response){
 	});
     response.json(list);
     response.end();
-});
-
-
-app.listen(8001, '212.109.194.252');
-console.log('Server running on 8001 port');
+}

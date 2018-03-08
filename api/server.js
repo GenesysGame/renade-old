@@ -28,5 +28,6 @@ module.exports = {
 
 require('./controllers/account')();
 require('./controllers/character')();
+require('./controllers/animations')();
 
 app.listen(8002);

@@ -1,2 +1,0 @@
-node start.js
-pause
