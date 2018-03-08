@@ -8,7 +8,8 @@ const maxCharactersCount = 1;
 
 const Character = db.sequelize.define('character', {
     name: { type: db.Sequelize.STRING, allowNull: false },
-    surname: { type: db.Sequelize.STRING, allowNull: false }
+    surname: { type: db.Sequelize.STRING, allowNull: false },
+    sex: { type: db.Sequelize.BOOLEAN, allowNull: false, defaultValue: true } // true - male, false - female
 })
 
 Account.hasMany(Character, {foreignKey: 'accountId'});
