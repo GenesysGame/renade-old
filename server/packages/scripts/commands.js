@@ -70,11 +70,17 @@ var registered = {
     "veh": (player, args) => {
         var modelName = args[0];
         if (modelName == null) { return; }
+        console.log('veh ' + modelName);
         var hash = mp.joaat(modelName);
         var pos = player.position;
         pos.x = pos.x + 10;
         pos.z = pos.z + 2;
-        mp.vehicles.new(hash, pos);
+        mp.vehicles.new(hash, pos, {
+            numberPlate: player.name,
+            locked: false,
+            engine: false,
+            dimension: 0
+        });
     },
 
 

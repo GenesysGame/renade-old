@@ -12,27 +12,36 @@ mp.events.add('loginWindow:login', (username, password) => {
 });
 
 mp.events.add('loginWindow:register', () => {
-    showWindow(null);
+    showWindow(null, false);
 });
 
-function showWindow(window) {
+function showWindow(window, isLogin) {
+    let show = window != null;
     mp.browsers.forEach(browser => {
-        browser.visible = false;
+        browser.active = false;
     });
 
-    mp.gui.chat.show(false);
-    mp.gui.cursor.visible = true;
-    mp.game.ui.displayRadar(false);
-    mp.players.local.freezePosition(true);
+    mp.gui.chat.show(!show);
+    mp.gui.cursor.visible = show;
+    mp.game.ui.displayRadar(!show);
 
-    loginCamera.setActive(true);
-    mp.game.cam.renderScriptCams(true, false, 0, true, false);
-
-    window.visible = true;
+    mp.players.local.freezePosition(isLogin);
+    loginCamera.setActive(isLogin);
+    mp.game.cam.renderScriptCams(isLogin, false, 0, true, false);
+    
+    if (window) {
+        window.active = true;
+    }
 }
+
+// MARK: - Events
+
+mp.events.add('player:spawn', () => {
+    showWindow(null, false);
+});
 
 // MARK: - Exports
 
 exports.showLoginWindow = function () {
-    showWindow(loginWindow);
+    showWindow(loginWindow, true);
 };

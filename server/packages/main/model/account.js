@@ -23,6 +23,15 @@ class Account {
         });
     }
 
+    json() {
+        return {
+            id: this.id,
+            username: this.username,
+            email: this.email,
+            "X-Token": this.xToken
+        }
+    }
+
 }
 module.exports = Account;
 
@@ -36,7 +45,8 @@ mp.events.add('account:login', (player, username, password) => {
         if (error != null) {
             console.log('Error: ' + error);
         } else {
-            console.log('Success: ' + account.username);
+            player.setVariable('model', account.json());
+            mp.events.call('playerLogin', player);
         }
     });
 });
