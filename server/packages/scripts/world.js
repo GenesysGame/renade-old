@@ -1,11 +1,5 @@
 ﻿var commands = require("./commands");
 
-function playerJoinHandler(player) {
-    console.log(player.name + " joined the server. Total: " + mp.players.length);
-
-    player.spawn(new mp.Vector3(-269.2, 6644, 7.4));
-}
-
 function playerQuitHandler(player, exitType, reason) {
     if (exitType != "kicked") {
         var str = player.name + " left the server (" + exitType + "). Total: " + (mp.players.length - 1);
@@ -27,7 +21,6 @@ function commandHandler(player, comText) {
 }
 
 mp.events.add({
-    "playerJoin": playerJoinHandler,
     "playerQuit": playerQuitHandler,
     "playerSpawn": playerSpawned,
     "playerCommand": commandHandler

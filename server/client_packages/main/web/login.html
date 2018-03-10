@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+        .outer {
+            display: table;
+            position: absolute;
+            height: 99%;
+            width: 99%;
+        }
+    
+        .middle {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    
+        .window {
+            margin: auto;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid white;
+        }
+    
+        .window-header {
+            padding: 2px 5px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+        }
+    
+        .window-content {
+            padding: 20px 20px 0px 20px;
+            color: white;
+        }
+    
+        .field {
+            clear: both;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+    
+        label {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="middle">
+            <div class="window">
+                <div class="window-header">Welcome to Renade RP!</div>
+                <div class="window-content">
+                    <div class="field">
+                        <label for="username">Username:</label>
+                        <input id="username" type="text">
+                    </div>
+                    <div class="field">
+                        <label for="password">Password:</label>
+                        <input id="password" type="password">
+                    </div>
+                    <div class="field">
+                        <input id="register" type="button" value="Register" onclick="register()" style="float: left;">
+                        <input id="login" type="button" value="Login" onclick="login()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

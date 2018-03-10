@@ -12,12 +12,12 @@ function create(body, callback) {
         callback(null, 'Unauthorized');
         return;
     }
-    if (!body.name || body.name.length <= 0) {
-        callback(null, "Name cannot be empty");
+    if (!body.firstname || body.firstname.length <= 0) {
+        callback(null, "Firstname cannot be empty");
         return;
     }
-    if (!body.surname || body.surname.length <= 0) {
-        callback(null, "Surname cannot be empty");
+    if (!body.lastname || body.lastname.length <= 0) {
+        callback(null, "Lastname cannot be empty");
         return;
     }
 

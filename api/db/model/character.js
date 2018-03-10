@@ -29,8 +29,9 @@ module.exports.createCharacter = function (model, callback) {
         }
         Character.create({
             accountId: accountId,
-            name: model.name,
-            surname: model.surname
+            name: model.firstname,
+            surname: model.lastname,
+            sex: model.male
         }).then(value => {
             callback(value, null);
         }).catch(err => {
@@ -43,7 +44,8 @@ module.exports.model = function (character) {
     if (!character) { return null; }
     return {
         id: character.id,
-        name: character.name,
-        surname: character.surname
+        firstname: character.name,
+        lastname: character.surname,
+        male: character.sex
     };
 }
