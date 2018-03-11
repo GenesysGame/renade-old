@@ -15,6 +15,15 @@ mp.events.add('loginWindow:register', () => {
     showWindow(null, false);
 });
 
+mp.events.add('loginWindow:stopLoading', (error) => {
+    mp.game.graphics.notify('test message. Error is the message with text: ' + error.data);
+
+    if (error) {
+        mp.game.graphics.notify(error);
+    }
+    loginWindow.execute('stopLoading();');
+})
+
 function showWindow(window, isLogin) {
     let show = window != null;
     mp.browsers.forEach(browser => {
@@ -44,4 +53,6 @@ mp.events.add('player:spawn', () => {
 
 exports.showLoginWindow = function () {
     showWindow(loginWindow, true);
+    let name = mp.players.local.name;
+    loginWindow.execute(`fillUsername('${name}');`);
 };

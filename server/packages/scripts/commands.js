@@ -26,11 +26,6 @@ module.exports = {
         var handler = registered[command];
         if (handler != null) {
             handler(player, args);
-        } else {
-            handler = authorization.commands[command];
-            if (handler != null) {
-                handler(player, args);
-            }
         }
     }
 

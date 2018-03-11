@@ -3,6 +3,8 @@
 const API = require('../api');
 const Character = require('./character');
 
+const kIsAuthorizingKey = 'IsBeingAuthorized';
+
 class Account {
 
     constructor(json) {
@@ -36,14 +38,18 @@ class Account {
 module.exports = Account;
 
 mp.events.add('account:login', (player, username, password) => {
+    if (player.getVariable(kIsAuthorizingKey) == true) { return; }
+    player.setVariable(kIsAuthorizingKey, true);
     let data = {
         username: username,
         password: password,
         email: "ggame.studio@yandex.ru"
     };
     Account.login(data, (account, error) => {
+        player.setVariable(kIsAuthorizingKey, false);
         if (error != null) {
             console.log('Error: ' + error);
+            player.call('loginWindow:stopLoading', [error]);
         } else {
             player.setVariable('model', account.json());
             mp.events.call('playerLogin', player);
