@@ -6,9 +6,8 @@ const client = new Client();
 let host = "http://localhost:8002/"
 
 function get(url, params, callback) {
-    let fullURL = host + url;
+    let fullURL = host + url + getQuery(params);
     var args = {
-        data: params,
         headers: { "Content-Type": "application/x-www-form-urlencoded" }
     };
     client.get(fullURL, args, (data, response) => {
@@ -37,6 +36,15 @@ function post(url, params, callback) {
     });
 
     
+}
+
+function getQuery(data) {
+    let keys = Object.keys(data);
+    if (keys.length == 0) { return ""; }
+    let args = keys.map((key) => {
+        return key.toString() + "=" + data[key].toString();
+    });
+    return "?" + args.join("&");
 }
 
 module.exports = {

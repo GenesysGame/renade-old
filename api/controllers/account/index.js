@@ -27,7 +27,9 @@ function post(request, response) {
 
 function get(request, response) {
     let accountId = request.headers[server.accountIdHeader];
-    controller.fetch(accountId, (account, error) => {
+    let query = request.query;
+    console.log(query);
+    let callback = function(account, error) {
         if (!account) {
             let err = (error) ? error : "Unknown error";
             response.status(404);
@@ -35,5 +37,11 @@ function get(request, response) {
         } else {
             response.json(account);
         }
-    });
+    }
+    if (!query.username || !query.password) {
+        controller.fetchById(accountId, callback);
+    } else {
+        controller.fetch(query.username, query.password, callback);
+    }
+
 }

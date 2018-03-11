@@ -19,10 +19,17 @@ class Account {
     }
 
     static login(data, callback) {
+        API.get('account', data, (json, error) => {
+            let account = json != null ? new Account(json) : null;
+            callback(account, error);
+        })
+    }
+
+    static register(data, callback) {
         API.post('account', data, (json, error) => {
             let account = json != null ? new Account(json) : null;
             callback(account, error);
-        });
+        })       
     }
 
     json() {
@@ -42,17 +49,36 @@ mp.events.add('account:login', (player, username, password) => {
     player.setVariable(kIsAuthorizingKey, true);
     let data = {
         username: username,
-        password: password,
-        email: "ggame.studio@yandex.ru"
+        password: password
     };
     Account.login(data, (account, error) => {
         player.setVariable(kIsAuthorizingKey, false);
         if (error != null) {
             console.log('Error: ' + error);
-            player.call('loginWindow:stopLoading', [error]);
+            player.call('loginWindow:stopLoading', [error.toString()]);
         } else {
             player.setVariable('model', account.json());
             mp.events.call('playerLogin', player);
+        }
+    });
+});
+
+mp.events.add('account:register', (player, username, password, email) => {
+    if (player.getVariable(kIsAuthorizingKey) == true) { return; }
+    player.setVariable(kIsAuthorizingKey, true);
+    let data = {
+        username: username,
+        password: password,
+        email: email
+    };
+    Account.register(data, (account, error) => {
+        player.setVariable(kIsAuthorizingKey, false);
+        if (error != null) {
+            console.log('Error: ' + error);
+            player.call('registerWindow:stopLoading', [error.toString()]);
+        } else {
+            player.setVariable('model', account.json());
+            mp.events.call('playerRegister', player);
         }
     });
 });

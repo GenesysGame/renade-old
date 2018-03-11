@@ -2,6 +2,7 @@
 
 module.exports = {
     create: create,
+    fetchById: fetchById,
     fetch: fetch
 };
 
@@ -49,7 +50,7 @@ function create(body, callback) {
                     let token = pass.encryptAccount(account);
                     callback(db.AccountModel.model(account, token), null);
                 } else {
-                    callback(null, "Invalid username or password");
+                    callback(null, "Account " + account.username + " is already exist");
                 }
             });
         }
@@ -59,12 +60,30 @@ function create(body, callback) {
 
 // Get account model for current account
 // Add parameter (targetId) in future to fetch other user's account
-function fetch(accountId, callback) {
+function fetchById(accountId, callback) {
     if (!accountId) {
         callback(null, 'Unauthorized');
         return;
     }
     db.AccountModel.getAccount({ id: accountId }, (account, err) => {
         callback(db.AccountModel.model(account), err);
+    });
+}
+
+function fetch(username, password, callback) {
+    if (!username || username.length <= 0 || !password || password.length <= 0) {
+        callback(null, "Username and password cannot be empty");
+        return;
+    }
+    db.AccountModel.getAccount({ username: username }, (account, err) => {
+        if (err) {
+            callback(null, err);
+            return;
+        }
+        if (pass.validate(account.password, password)) {
+            callback(db.AccountModel.model(account), null);
+        } else {
+            callback(null, "Invalid username or password");
+        }
     });
 }

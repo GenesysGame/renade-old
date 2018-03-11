@@ -21,6 +21,14 @@ mp.events.add('playerJoin', function(player) {
 });
 
 mp.events.add('playerLogin', function(player) {
+    playerAuthorized(player, false);
+});
+
+mp.events.add('playerRegister', function(player) {
+    playerAuthorized(player, true);
+});
+
+function playerAuthorized(player, isJustRegistered) {
     let model = player.getVariable('model');
     console.log(player.name + " authorized as " + model.username);
     player.name = model.username;
@@ -29,5 +37,9 @@ mp.events.add('playerLogin', function(player) {
     player.alpha = 1;
     player.spawn(new mp.Vector3(-269.2, 6644, 7.4));
 
-    player.call('player:spawn');
-});
+    if (isJustRegistered) {
+        player.call('player:spawn-new');
+    } else {
+        player.call('player:spawn');
+    }
+}
