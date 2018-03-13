@@ -81,7 +81,8 @@ function fetch(username, password, callback) {
             return;
         }
         if (pass.validate(account.password, password)) {
-            callback(db.AccountModel.model(account), null);
+            let token = pass.encryptAccount(account);
+            callback(db.AccountModel.model(account, token), null);
         } else {
             callback(null, "Invalid username or password");
         }

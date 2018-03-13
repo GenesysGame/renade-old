@@ -4,13 +4,13 @@ const express = require('express');
 const server = require('../../server');
 
 module.exports = function () {
-    server.app.post('/account', (req, res) => { post(req, res); });
-    server.app.get('/account', (req, res) => { get(req, res); });
+    server.app.put('/account', (req, res) => { put(req, res); }); //register
+    server.app.post('/account', (req, res) => { post(req, res); }); //login
 };
 
 const controller = require('./controller');
 
-function post(request, response) {
+function put(request, response) {
     controller.create(request.body, (account, error) => {
         if (error) { 
             response.status(401);
@@ -25,10 +25,10 @@ function post(request, response) {
     });
 }
 
-function get(request, response) {
+function post(request, response) {
     let accountId = request.headers[server.accountIdHeader];
-    let query = request.query;
-    console.log(query);
+    let body = request.body;
+    console.log(body);
     let callback = function(account, error) {
         if (!account) {
             let err = (error) ? error : "Unknown error";
@@ -38,10 +38,10 @@ function get(request, response) {
             response.json(account);
         }
     }
-    if (!query.username || !query.password) {
+    if (!body.username || !body.password) {
         controller.fetchById(accountId, callback);
     } else {
-        controller.fetch(query.username, query.password, callback);
+        controller.fetch(body.username, body.password, callback);
     }
 
 }
