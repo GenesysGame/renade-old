@@ -34,8 +34,22 @@ function post(url, params, callback) {
             callback(data, null); // success
         }
     });
+}
 
-    
+function put(url, params, callback) {
+    let fullURL = host + url;
+    var args = {
+        data: params,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    };
+    client.put(fullURL, args, (data, response) => {
+        console.log('PUT: ' + fullURL + ': ' + response.statusCode);
+        if (response.statusCode >= 300) {
+            callback(null, data); // error
+        } else {
+            callback(data, null); // success
+        }
+    });
 }
 
 function getQuery(data) {
@@ -49,5 +63,6 @@ function getQuery(data) {
 
 module.exports = {
     get: get,
-    post: post
+    post: post,
+    put: put
 };

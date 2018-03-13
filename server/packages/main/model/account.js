@@ -19,14 +19,14 @@ class Account {
     }
 
     static login(data, callback) {
-        API.get('account', data, (json, error) => {
+        API.post('account', data, (json, error) => {
             let account = json != null ? new Account(json) : null;
             callback(account, error);
         })
     }
 
     static register(data, callback) {
-        API.post('account', data, (json, error) => {
+        API.put('account', data, (json, error) => {
             let account = json != null ? new Account(json) : null;
             callback(account, error);
         })       
@@ -54,7 +54,7 @@ mp.events.add('account:login', (player, username, password) => {
     Account.login(data, (account, error) => {
         player.setVariable(kIsAuthorizingKey, false);
         if (error != null) {
-            console.log('Error: ' + error);
+            console.log('Error: ' + error.toString());
             player.call('loginWindow:stopLoading', [error.toString()]);
         } else {
             player.setVariable('model', account.json());
@@ -74,7 +74,7 @@ mp.events.add('account:register', (player, username, password, email) => {
     Account.register(data, (account, error) => {
         player.setVariable(kIsAuthorizingKey, false);
         if (error != null) {
-            console.log('Error: ' + error);
+            console.log('Error: ' + error.toString());
             player.call('registerWindow:stopLoading', [error.toString()]);
         } else {
             player.setVariable('model', account.json());
