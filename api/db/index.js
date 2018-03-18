@@ -27,4 +27,5 @@ module.exports.AccountModel = AccountModel;
 const CharacterModel = require('./model/character');
 module.exports.CharacterModel = CharacterModel;
 
-sequelize.sync({ force: false, alter: true });
+//sequelize.sync({ force: false, alter: true });
+sequelize.sync({ });

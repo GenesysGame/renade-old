@@ -11,7 +11,8 @@ module.exports = function () {
 const controller = require('./controller');
 
 function put(request, response) {
-    controller.create(request.body, (account, error) => {
+    let ip = request.headers[server.ipHeader];
+    controller.create(request.body, ip,  (account, error) => {
         if (error) { 
             response.status(401);
             console.log(error);
@@ -27,6 +28,7 @@ function put(request, response) {
 
 function post(request, response) {
     let accountId = request.headers[server.accountIdHeader];
+    let ip = request.headers[server.ipHeader];
     let body = request.body;
     console.log(body);
     let callback = function(account, error) {
@@ -41,7 +43,7 @@ function post(request, response) {
     if (!body.username || !body.password) {
         controller.fetchById(accountId, callback);
     } else {
-        controller.fetch(body.username, body.password, callback);
+        controller.fetch(body.username, body.password, ip, callback);
     }
 
 }

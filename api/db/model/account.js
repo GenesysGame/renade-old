@@ -5,7 +5,8 @@ const db = require('../../db');
 const Account = db.sequelize.define('account', {
     username: { type: db.Sequelize.STRING(32), unique: true, allowNull: false },
     password: { type: db.Sequelize.STRING, allowNull: false },
-    email: { type: db.Sequelize.STRING, allowNull: false }
+    email: { type: db.Sequelize.STRING, allowNull: false },
+    lastIp: { type: db.Sequelize.STRING, allowNull: true }
 });
 
 module.exports.Account = Account;
@@ -20,7 +21,7 @@ module.exports.findAccount = function (username, callback) {
     });
 }
 
-// get account by username
+// get account by username (internal)
 function getAccount(model, callback) {
     Account.findOne({
         where: model,
@@ -58,6 +59,17 @@ module.exports.createAccount = function (username, passHash, email, callback) {
         getAccount({ username: username}, callback);
     }).catch(err => {
         callback(null, err);
+    });
+}
+
+// update last Ip for account
+module.exports.updateLastIp = function (id, ip, callback) {
+    Account.update({
+        lastIp: ip
+    }, { where: { id: id }}).then(res => {
+        callback();
+    }).catch(err => {
+        callback(err);
     });
 }
 

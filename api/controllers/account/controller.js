@@ -9,7 +9,7 @@ module.exports = {
 const pass = require('../../helpers/password');
 const db = require('../../db');
 
-function create(body, callback) {
+function create(body, ip, callback) {
     const username = body.username;
     const password = body.password;
     const email = body.email;
@@ -38,6 +38,9 @@ function create(body, callback) {
                 if (account) {
                     let token = pass.encryptAccount(account);
                     callback(db.AccountModel.model(account, token), null);
+                    db.AccountModel.updateLastIp(account.id, ip, err => {
+                        if (err) { console.log("Error: " + err); }
+                    });
                 } else {
                     callback(null, err);
                 }
@@ -49,6 +52,9 @@ function create(body, callback) {
                 } else if (pass.validate(account.password, password)) {
                     let token = pass.encryptAccount(account);
                     callback(db.AccountModel.model(account, token), null);
+                    db.AccountModel.updateLastIp(account.id, ip, err => {
+                        if (err) { console.log("Error: " + err); }
+                    });
                 } else {
                     callback(null, "Account " + account.username + " is already exist");
                 }
@@ -70,7 +76,7 @@ function fetchById(accountId, callback) {
     });
 }
 
-function fetch(username, password, callback) {
+function fetch(username, password, ip, callback) {
     if (!username || username.length <= 0 || !password || password.length <= 0) {
         callback(null, "Username and password cannot be empty");
         return;
@@ -83,6 +89,9 @@ function fetch(username, password, callback) {
         if (pass.validate(account.password, password)) {
             let token = pass.encryptAccount(account);
             callback(db.AccountModel.model(account, token), null);
+            db.AccountModel.updateLastIp(account.id, ip, err => {
+                if (err) { console.log("Error: " + err); }
+            });
         } else {
             callback(null, "Invalid username or password");
         }
