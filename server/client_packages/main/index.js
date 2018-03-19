@@ -1,5 +1,6 @@
 // Main module main file
 
+let loadingWindow = require('main/views/loadingWindow');
 let loginWindow = require('main/views/loginWindow');
 let registerWindow = require('main/views/registerWindow');
 
@@ -16,6 +17,10 @@ mp.events.add('player:spawn-new', () => {
 });
 
 // MARK: - Exports
+
+exports.showLoadingWindow = function () {
+    showWindow(loadingWindow, true);
+}
 
 exports.showLoginWindow = function () {
     showWindow(loginWindow, true);

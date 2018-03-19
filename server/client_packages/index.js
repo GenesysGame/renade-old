@@ -17,6 +17,10 @@ mp.events.add('player:createPed', () => {
 
 const main = require('./main');
 
+mp.events.add('player:showLoadingWindow', () => {
+    main.showLoadingWindow();
+});
+
 mp.events.add('player:showLoginWindow', () => {
     main.showLoginWindow();
 });

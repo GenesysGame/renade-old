@@ -13,11 +13,19 @@ const Dimension = {
 mp.events.add('playerJoin', function(player) {
     console.log(player.name + " joined the server. Total: " + mp.players.length);
 
-    // TODO: - Check if the player is already authorized
     player.dimension = Dimension.unauthorized;
     player.position = new mp.Vector3(166, 6866, 197);
     player.alpha = 0;
-    player.call('player:showLoginWindow');
+
+    player.call('player:showLoadingWindow');
+    Account.fastLogin(player.name, (account, error) => {
+        if (account) {
+            player.setVariable('model', account.json());
+            mp.events.call('playerLogin', player);
+        } else {
+            player.call('player:showLoginWindow');
+        }
+    });
 });
 
 mp.events.add('playerLogin', function(player) {

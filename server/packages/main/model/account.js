@@ -18,18 +18,25 @@ class Account {
         });
     }
 
+    static fastLogin(username, callback) {
+        API.get('account', { username: username }, (json, error) => {
+            let account = json != null ? new Account(json) : null;
+            callback(account, error);
+        });
+    }
+
     static login(data, callback) {
         API.post('account', data, (json, error) => {
             let account = json != null ? new Account(json) : null;
             callback(account, error);
-        })
+        });
     }
 
     static register(data, callback) {
         API.put('account', data, (json, error) => {
             let account = json != null ? new Account(json) : null;
             callback(account, error);
-        })       
+        }); 
     }
 
     json() {
