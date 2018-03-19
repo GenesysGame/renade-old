@@ -3,7 +3,8 @@
 module.exports = {
     create: create,
     fetchById: fetchById,
-    fetch: fetch
+    fetch: fetch,
+    fastFetch: fastFetch
 };
 
 const pass = require('../../helpers/password');
@@ -94,6 +95,26 @@ function fetch(username, password, ip, callback) {
             });
         } else {
             callback(null, "Invalid username or password");
+        }
+    });
+}
+
+// fetch account by last ip nad username, e. g. auto login
+function fastFetch(username, ip, callback) {
+    if (!username || username.length <= 0) {
+        callback(null, "Username cannot be empty");
+        return;
+    }
+    db.AccountModel.getAccount({ username: username }, (account, err) => {
+        if (err) {
+            callback(null, err);
+            return;
+        }
+        if (account.lastIp == ip) {
+            let token = pass.encryptAccount(account);
+            callback(db.AccountModel.model(account, token), null);
+        } else {
+            callback(null, "Ip address was changed");
         }
     });
 }

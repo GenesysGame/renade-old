@@ -6,6 +6,7 @@ const server = require('../../server');
 module.exports = function () {
     server.app.put('/account', (req, res) => { put(req, res); }); //register
     server.app.post('/account', (req, res) => { post(req, res); }); //login
+    server.app.get('/account', (req, res) => { getContinue(req, res); }); //fast login
 };
 
 const controller = require('./controller');
@@ -45,5 +46,20 @@ function post(request, response) {
     } else {
         controller.fetch(body.username, body.password, ip, callback);
     }
+}
 
+function getContinue(request, response) {
+    let ip = request.headers[server.ipHeader];
+    let body = request.query;
+    controller.fastFetch(body.username, ip, (account, error) => {
+        if (error) {
+            response.status(401);
+            response.send(error);
+        } else if (account) {
+            response.json(account);
+        } else {
+            response.status(404);
+            response.send("Account not found");
+        }
+    });
 }
