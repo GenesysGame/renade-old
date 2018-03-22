@@ -18,7 +18,7 @@ mp.events.add('playerJoin', function(player) {
     player.alpha = 0;
 
     player.call('player:showLoadingWindow');
-    Account.fastLogin(player.name, (account, error) => {
+    Account.fastLogin(player, (account, error) => {
         if (account) {
             player.setVariable('model', account.json());
             mp.events.call('playerLogin', player);

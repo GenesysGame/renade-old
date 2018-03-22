@@ -7,34 +7,35 @@ const kIsAuthorizingKey = 'IsBeingAuthorized';
 
 class Account {
 
-    constructor(json) {
+    constructor(json, player) {
         this.id = json.id;
         this.username = json.username;
         this.email = json.email;
         this.xToken = json["X-Token"];
+        this.player = player;
 
         this.characters = json.characters.map((charJson) => {
             return new Character(charJson);
         });
     }
 
-    static fastLogin(username, callback) {
-        API.get('account', { username: username }, (json, error) => {
-            let account = json != null ? new Account(json) : null;
+    static fastLogin(player, callback) {
+        API.get(player, 'account', { username: player.name }, (json, error) => {
+            let account = json != null ? new Account(json, player) : null;
             callback(account, error);
         });
     }
 
-    static login(data, callback) {
-        API.post('account', data, (json, error) => {
-            let account = json != null ? new Account(json) : null;
+    static login(player, data, callback) {
+        API.post(player, 'account', data, (json, error) => {
+            let account = json != null ? new Account(json, player) : null;
             callback(account, error);
         });
     }
 
-    static register(data, callback) {
-        API.put('account', data, (json, error) => {
-            let account = json != null ? new Account(json) : null;
+    static register(player, data, callback) {
+        API.put(player, 'account', data, (json, error) => {
+            let account = json != null ? new Account(json, player) : null;
             callback(account, error);
         }); 
     }
@@ -58,7 +59,7 @@ mp.events.add('account:login', (player, username, password) => {
         username: username,
         password: password
     };
-    Account.login(data, (account, error) => {
+    Account.login(player, data, (account, error) => {
         player.setVariable(kIsAuthorizingKey, false);
         if (error != null) {
             console.log('Error: ' + error.toString());
@@ -78,7 +79,7 @@ mp.events.add('account:register', (player, username, password, email) => {
         password: password,
         email: email
     };
-    Account.register(data, (account, error) => {
+    Account.register(player, data, (account, error) => {
         player.setVariable(kIsAuthorizingKey, false);
         if (error != null) {
             console.log('Error: ' + error.toString());

@@ -9,10 +9,6 @@ function playerQuitHandler(player, exitType, reason) {
     console.log(str);
 }
 
-function playerSpawned(player) {
-    player.model = 1885233650;
-}
-
 function commandHandler(player, comText) {
     var arr = comText.split(" ");
     var cmd = arr[0];
@@ -22,6 +18,5 @@ function commandHandler(player, comText) {
 
 mp.events.add({
     "playerQuit": playerQuitHandler,
-    "playerSpawn": playerSpawned,
     "playerCommand": commandHandler
 });

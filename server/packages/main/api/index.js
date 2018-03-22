@@ -5,10 +5,10 @@ const client = new Client();
 
 let host = "http://localhost:8002/"
 
-function get(url, params, callback) {
+function get(player, url, params, callback) {
     let fullURL = host + url + getQuery(params);
     var args = {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        headers: getHeaders(player)
     };
     client.get(fullURL, args, (data, response) => {
         console.log('GET: ' + fullURL + ': ' + response.statusCode);
@@ -20,11 +20,11 @@ function get(url, params, callback) {
     });
 }
 
-function post(url, params, callback) {
+function post(player, url, params, callback) {
     let fullURL = host + url;
     var args = {
         data: params,
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        headers: getHeaders(player)
     };
     client.post(fullURL, args, (data, response) => {
         console.log('POST: ' + fullURL + ': ' + response.statusCode);
@@ -36,11 +36,11 @@ function post(url, params, callback) {
     });
 }
 
-function put(url, params, callback) {
+function put(player, url, params, callback) {
     let fullURL = host + url;
     var args = {
         data: params,
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        headers: getHeaders(player)
     };
     client.put(fullURL, args, (data, response) => {
         console.log('PUT: ' + fullURL + ': ' + response.statusCode);
@@ -59,6 +59,19 @@ function getQuery(data) {
         return key.toString() + "=" + data[key].toString();
     });
     return "?" + args.join("&");
+}
+
+function getHeaders(player) {
+    var headers = {};
+    headers["Content-Type"] = "application/x-www-form-urlencoded";
+    if (player) {
+        headers["x-forwarded-for"] = player.ip;
+        let model = player.getVariable('model');
+        if (model && model["X-Token"]) {
+            headers["X-Token"] = model["X-Token"];
+        }
+    }
+    return headers;
 }
 
 module.exports = {
