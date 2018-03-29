@@ -1,11 +1,4 @@
-module.exports.get = function(request, response, conf, mysql){
-	response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-	const con = mysql.createConnection({
-	    host     : conf.get('db').connection,
-	    user     : conf.get('db').user,
-	    password : conf.get('db').pass, 
-		database : conf.get('db').database
-	});
+module.exports.get = function(request, response, conf, con){
 	con.query('SELECT * FROM `clothing`', function(error, result, fields){
 		if(error == null){
 			var presets = [];
@@ -25,20 +18,15 @@ module.exports.get = function(request, response, conf, mysql){
 		} else{
 			console.log(error);
 		}
-		response.json(presets);
 	});
-	con.end();
-	response.end();
 };
 
-module.exports.delete = function(request, response){
-	response.header('Content-Type', 'application/json');
-	response.header("Access-Control-Allow-Origin", "*");
+module.exports.delete = function(request, response, con){
+	con.query("DELETE FROM `clothing` WHERE `name` = '"+request.params['name']+"'");
 	response.end('debug delete');
 };
 
 module.exports.put = function(request, response){
-	response.header('Content-Type', 'application/json');
-	response.header("Access-Control-Allow-Origin", "*");
+	console.log(request.body);
 	response.end('debug put');
 };

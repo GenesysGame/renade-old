@@ -1,9 +1,9 @@
 {
 	"port": 8001,
     "db": {
-        "connection": "188.120.235.38",
+        "connection": "212.109.194.252",
         "database": "renade",
         "user": "rage",
-        "pass": "24Svjatogor93"
+        "pass": "ggame2018"
     }
 }

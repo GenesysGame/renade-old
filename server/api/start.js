@@ -8,6 +8,15 @@
     animlist = require('./routes/anim/animations.js'),
     total = 0,
     pagesize = 200;
+    bodyParser = require('body-parser');
+    urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+const con = mysql.createConnection({
+    host     : conf.get('db').connection,
+    user     : conf.get('db').user,
+    password : conf.get('db').pass, 
+    database : conf.get('db').database
+});
 
 animlist.animations.forEach(function(v, i) {
     total += 1;
@@ -20,21 +29,24 @@ app.get('/admin/animations/get', function(request, response){
 });
 
 app.get('/admin/clothes/get', function(request, response){
-    clothes.get(request, response, conf, mysql);
+    clothes.get(request, response, conf, con);
 });
 
-app.delete('/admin/clothes/delete', function(request, response){
-    clothes.delete(request, response);
+app.delete('/admin/clothes/delete/:name', function(request, response){
+    clothes.delete(request, response, con);
 }); 
 
-app.put('/admin/clothes/put', function(request, response){
+app.put('/admin/clothes/put', urlencodedParser, function(request, response){
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
     clothes.put(request, response);
 });
 
-app.options('*', function(request, response){
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
-    response.end();
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+    next();
 });
+
 app.listen(conf.get('port'));
 console.log('Server running on '+conf.get("port")+' port');

@@ -1,5 +1,6 @@
 var list = $('.list');
 $('#createpop').hide();
+$('#confirm').hide();
 
 function update(){
 	$.get( "http://127.0.0.1:8001/admin/clothes/get", function( data ) {
@@ -18,14 +19,7 @@ function update(){
 update();
 
 $('#delete').click(function(){
-	$.ajax({
-	    url: 'http://127.0.0.1:8001/admin/clothes/delete',
-	    method: "DELETE",
-	    success: function(data) {
-	        console.log(data);
-	    }
-	});
-	update();
+	$('#confirm').show();
 });
 
 $('#create').click(function(){
@@ -36,7 +30,7 @@ $('#save').click(function(){
 	if($('#name').val() != ''){
 		$.ajax({
 		    url: 'http://127.0.0.1:8001/admin/clothes/put',
-		    data: $('#name').val(),
+		    data: {name: $('#name').val()},
 		    method: "PUT"
 		}).done(function(data){
 			console.log(data);
@@ -45,4 +39,21 @@ $('#save').click(function(){
 		update();
 	}
 	$('#createpop').hide();
+});
+
+$('#yes').click(function(){
+	$.ajax({
+	    url: 'http://127.0.0.1:8001/admin/clothes/delete/'+$('.list option:selected').text(),
+	    method: "DELETE",
+	    async: false,
+	    success: function(data) {
+	        console.log(data);
+	    }
+	});
+	$('#confirm').hide();
+	update();
+});
+
+$('#no').click(function(){
+	$('#confirm').hide();
 });
