@@ -24,6 +24,12 @@ animlist.animations.forEach(function(v, i) {
 console.log('Loaded',total,'animations');
 var totalPages  = Math.floor(total / pagesize);
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+    next();
+});
+
 app.get('/admin/animations/get', function(request, response){
     anim.get(request, response, totalPages, pagesize);
 });
@@ -37,15 +43,7 @@ app.delete('/admin/clothes/delete/:name', function(request, response){
 }); 
 
 app.put('/admin/clothes/put', urlencodedParser, function(request, response){
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
-    clothes.put(request, response);
-});
-
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
-    next();
+    clothes.put(request, response, con);
 });
 
 app.listen(conf.get('port'));

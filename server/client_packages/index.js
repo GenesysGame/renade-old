@@ -5,6 +5,7 @@ let animlist = require('./animlist/animlist.js');
 let camtool = require('./camtool/camtool.js');
 let guntool = require('./guntool/guntool.js');
 let devtool = require('./devtool/devtool.js');
+let clothes = require('./clothes/clothes.js');
 
 mp.events.add('player:createPed', () => {
     peds.createPed(mp.players.local);
