@@ -153,6 +153,17 @@ var registered = {
         player.outputChatBox(string);
     },
 
+    "gcl": (player, args) => {
+        if (args[0] == 'getclothes') {
+          if (args.length < 2 || !parseInt(args[1])) {
+            return player.outputChatBox('Use syntax: /gcl [component_id]');
+          } else {
+            let clothes = player.getClothes(parseInt(args[1]));
+            player.outputChatBox('drawable: ' + clothes.drawable + ' texture: ' + clothes.texture + ' palette: ' + palette.texture);
+          }
+        }
+    },
+
     "pr": (player, args) => {
         var prop = parseInt(args[0]);
         if (prop == null || isNaN(prop)) {

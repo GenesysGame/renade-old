@@ -44,6 +44,7 @@ function playerAuthorized(player, isJustRegistered) {
     player.dimension = Dimension.general;
     player.alpha = 1;
     player.spawn(new mp.Vector3(-269.2, 6644, 7.4));
+    Character.config(player);
 
     if (isJustRegistered) {
         player.call('player:spawn-new');
