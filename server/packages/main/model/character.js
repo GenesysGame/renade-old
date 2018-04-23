@@ -30,7 +30,6 @@ class Character {
         );
         console.log('Customization completed');
         player.setClothes(2, 10, 0, 0);
-
     }
 
 }

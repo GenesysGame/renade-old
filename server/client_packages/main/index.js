@@ -7,13 +7,17 @@ let registerWindow = require('main/views/registerWindow');
 // MARK: - Events
 
 mp.events.add('player:spawn', () => {
-    mp.game.graphics.notify('~g~Welcome back, ~s~' + mp.players.local.name + '!');
+    let player = mp.players.local;
+    mp.game.graphics.notify('~g~Welcome back, ~s~' + player.name + '!');
     showWindow(null, false);
+    player.setAlpha(255);
 });
 
 mp.events.add('player:spawn-new', () => {
-    mp.game.graphics.notify('~g~Welcome, ~s~' + mp.players.local.name + '!');
+    let player = mp.players.local;
+    mp.game.graphics.notify('~g~Welcome, ~s~' + player.name + '!');
     showWindow(null, false);
+    player.setAlpha(255);
 });
 
 // MARK: - Exports

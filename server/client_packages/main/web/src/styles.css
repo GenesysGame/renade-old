@@ -1,3 +1,13 @@
+@font-face {
+    font-family: header;
+    src: url('fonts/Chalet-NewYorkSixty.otf') format('opentype');
+}
+
+@font-face {
+    font-family: regular;
+    src: url('fonts/Chalet-LondonSixty.otf') format('opentype');
+}
+
 .outer {
     display: table;
     position: absolute;
@@ -22,6 +32,8 @@
     padding: 2px 5px;
     background: rgba(0, 0, 0, 0.8);
     color: white;
+    font-family: header;
+    font-size: 20px;
 }
 
 .window-content {
@@ -38,6 +50,11 @@
 
 label {
     margin-right: 20px;
+    font-family: regular;
+}
+
+input {
+    font-family: regular;
 }
 
 .loader {
