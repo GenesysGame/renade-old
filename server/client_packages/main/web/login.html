@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./src/styles.css">
+    <title></title>
+</head>
+<body>
+    <div class="outer">
+        <div class="middle">
+            <div class="window">
+                <div class="window-header">Welcome to Renade RP!</div>
+                <div class="window-content">
+                    <div class="field">
+                        <label for="username">Username:</label>
+                        <input id="username" type="text">
+                    </div>
+                    <div class="field">
+                        <label for="password">Password:</label>
+                        <input id="password" type="password">
+                    </div>
+                    <div class="loader" style="visibility: hidden;"></div>
+                    <div class="field">
+                        <input id="register" type="button" value="Register" onclick="register()" style="float: left;">
+                        <input id="login" type="button" value="Login" onclick="login()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

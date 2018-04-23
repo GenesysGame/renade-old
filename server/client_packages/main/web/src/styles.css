@@ -1,0 +1,80 @@
+@font-face {
+    font-family: header;
+    src: url('fonts/Chalet-NewYorkSixty.otf') format('opentype');
+}
+
+@font-face {
+    font-family: regular;
+    src: url('fonts/Chalet-LondonSixty.otf') format('opentype');
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 99%;
+    width: 99%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.window {
+    margin: auto;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid white;
+}
+
+.window-header {
+    padding: 2px 5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-family: header;
+    font-size: 20px;
+}
+
+.window-content {
+    padding: 0px 20px 0px 20px;
+    color: white;
+}
+
+.field {
+    clear: both;
+    text-align: right;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+label {
+    margin-right: 20px;
+    font-family: regular;
+}
+
+input {
+    font-family: regular;
+}
+
+.loader {
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #3498db;
+    width: 15px;
+    height: 15px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

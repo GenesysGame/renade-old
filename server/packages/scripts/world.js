@@ -1,11 +1,4 @@
-﻿var db = require("./db");
-var commands = require("./commands");
-
-function playerJoinHandler(player) {
-    console.log(player.name + " joined the server. Total: " + mp.players.length);
-
-    player.spawn(new mp.Vector3(-269.2, 6644, 7.4));
-}
+﻿var commands = require("./commands");
 
 function playerQuitHandler(player, exitType, reason) {
     if (exitType != "kicked") {
@@ -16,10 +9,6 @@ function playerQuitHandler(player, exitType, reason) {
     console.log(str);
 }
 
-function playerSpawned(player) {
-    player.model = 1885233650;
-}
-
 function commandHandler(player, comText) {
     var arr = comText.split(" ");
     var cmd = arr[0];
@@ -28,8 +17,6 @@ function commandHandler(player, comText) {
 }
 
 mp.events.add({
-    "playerJoin": playerJoinHandler,
     "playerQuit": playerQuitHandler,
-    "playerSpawn": playerSpawned,
     "playerCommand": commandHandler
 });

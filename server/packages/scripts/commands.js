@@ -1,5 +1,4 @@
 ﻿var ipls = require("./ipls");
-var authorization = require("./authorization");
 let events = require('./events');
 
 let male = 1885233650;
@@ -27,11 +26,6 @@ module.exports = {
         var handler = registered[command];
         if (handler != null) {
             handler(player, args);
-        } else {
-            handler = authorization.commands[command];
-            if (handler != null) {
-                handler(player, args);
-            }
         }
     }
 
@@ -80,11 +74,17 @@ var registered = {
     "veh": (player, args) => {
         var modelName = args[0];
         if (modelName == null) { return; }
+        console.log('veh ' + modelName);
         var hash = mp.joaat(modelName);
         var pos = player.position;
         pos.x = pos.x + 10;
         pos.z = pos.z + 2;
-        mp.vehicles.new(hash, pos);
+        mp.vehicles.new(hash, pos, {
+            numberPlate: player.name,
+            locked: false,
+            engine: false,
+            dimension: 0
+        });
     },
 
 
@@ -160,6 +160,17 @@ var registered = {
         let string = "Set " + component + " to " + id + ", texture " + tex + "palete " + pal;
         console.log(string);
         player.outputChatBox(string);
+    },
+
+    "gcl": (player, args) => {
+        if (args[0] == 'getclothes') {
+          if (args.length < 2 || !parseInt(args[1])) {
+            return player.outputChatBox('Use syntax: /gcl [component_id]');
+          } else {
+            let clothes = player.getClothes(parseInt(args[1]));
+            player.outputChatBox('drawable: ' + clothes.drawable + ' texture: ' + clothes.texture + ' palette: ' + palette.texture);
+          }
+        }
     },
 
     "pr": (player, args) => {
