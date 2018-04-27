@@ -66,7 +66,7 @@ function getHeaders(player) {
     headers["Content-Type"] = "application/x-www-form-urlencoded";
     if (player) {
         headers["x-forwarded-for"] = player.ip;
-        let model = player.getVariable('model');
+        let model = player.data.model;
         if (model && model["X-Token"]) {
             headers["X-Token"] = model["X-Token"];
         }

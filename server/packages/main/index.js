@@ -20,7 +20,7 @@ mp.events.add('playerJoin', function(player) {
     player.call('player:showLoadingWindow');
     Account.fastLogin(player, (account, error) => {
         if (account) {
-            player.setVariable('model', account.json());
+            player.data.model = account.json();
             mp.events.call('playerLogin', player);
         } else {
             player.call('player:showLoginWindow');
@@ -37,7 +37,7 @@ mp.events.add('playerRegister', function(player) {
 });
 
 function playerAuthorized(player, isJustRegistered) {
-    let model = player.getVariable('model');
+    let model = player.data.model;
     console.log(player.name + " authorized as " + model.username);
     player.name = model.username;
 

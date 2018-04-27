@@ -53,39 +53,39 @@ class Account {
 module.exports = Account;
 
 mp.events.add('account:login', (player, username, password) => {
-    if (player.getVariable(kIsAuthorizingKey) == true) { return; }
-    player.setVariable(kIsAuthorizingKey, true);
+    if (player.data[kIsAuthorizingKey] == true) { return; }
+    player.data[kIsAuthorizingKey] = true;
     let data = {
         username: username,
         password: password
     };
     Account.login(player, data, (account, error) => {
-        player.setVariable(kIsAuthorizingKey, false);
+        player.data[kIsAuthorizingKey] = false;
         if (error != null) {
             console.log('Error: ' + error.toString());
             player.call('loginWindow:stopLoading', [error.toString()]);
         } else {
-            player.setVariable('model', account.json());
+            player.data.model = account.json();
             mp.events.call('playerLogin', player);
         }
     });
 });
 
 mp.events.add('account:register', (player, username, password, email) => {
-    if (player.getVariable(kIsAuthorizingKey) == true) { return; }
-    player.setVariable(kIsAuthorizingKey, true);
+    if (player.data[kIsAuthorizingKey] == true) { return; }
+    player.data[kIsAuthorizingKey] = true;
     let data = {
         username: username,
         password: password,
         email: email
     };
     Account.register(player, data, (account, error) => {
-        player.setVariable(kIsAuthorizingKey, false);
+        player.data[kIsAuthorizingKey] = false;
         if (error != null) {
             console.log('Error: ' + error.toString());
             player.call('registerWindow:stopLoading', [error.toString()]);
         } else {
-            player.setVariable('model', account.json());
+            player.data.model = account.json();
             mp.events.call('playerRegister', player);
         }
     });
